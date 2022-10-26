@@ -6,6 +6,28 @@ This project, Bob Life, is an _Incubation_ project from CSCI 3312. Our project i
 ## Summary of the Game: 
 Bob (672 years) falls in love with Bobette but Bobette finds Brutus the Barber Beefcake. He trains himself in multiple categories and challenges Brutus the Barber Beefcake to a showdown. After winning, Bob wins Bobette's affection and marries her in the end cutscene. If players max out all stats, they can marry Brutus.
 
+## Stats of Bob 
+| Stats          | Associated Minigame  |
+| -------------  |:-------------:       |
+| Jump           | Bobble Jump          |
+| Strength       | Weight Lifting       |
+| Speed          | Running              |
+
+These are the stats and their associated minigames. The stats of Bob will be shown in the top right hand side with a bar indicating how much experience Bob has with that stat.
+
+## Minigames
+
+### Bobble Jump
+The objective of this game is to jump onto the smaller platforms without falling out of the screen. _Bobble Jump_ game's screen will progressively move faster and further up the screen as time passes. 
+
+[Insert Image of Doodle Jump but with Bob here]
+![Bobble Jump](addPNG)
+
+__Gameplay Mechanincs__: Players will have to manipulate Bob with `ad` or the right and left arrow keys to move side to side. Players will use the space bar key in order to jump.
+
+### Weight Lifting 
+The objective of this game is to lift the weights 
+
 ## Summary of the gameplay aesthetics/dynamics: 
 - Sprites will change based on the change of Bob’s stats, sprites becomes more buff and closer to Bobette’s “ideal”
 
@@ -24,7 +46,7 @@ Bob (672 years) falls in love with Bobette but Bobette finds Brutus the Barber B
 - Easy to play
 - Speedrunning/Replayability
 
-##Why my game is interesting or different: 
+## Why my game is interesting or different: 
 - Trying to get with the Girl or Brutus the Barber Beefcake
 - Bob’s ability and sprites change based on what stats are leveled up
 
