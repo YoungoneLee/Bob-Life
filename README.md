@@ -1,3 +1,4 @@
+
 # Bob-Life: DingleBob Inc
 
 This project, Bob Life, is an _Incubation_ project from CSCI 3312. Our project is similar to __Duck Life__ where the player is able to train their character's stats throughout the game through small minigames.
@@ -29,5 +30,3 @@ Bob (672 years) falls in love with Bobette but Bobette finds Brutus the Barber B
 
 ## Competitive products and similar games
 - Duck Life 1, 2, 3, and 4; Sonic battle 2 Chaos races
-
-
