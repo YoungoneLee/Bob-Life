@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -48,7 +48,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 170, y: 480, z: 350, w: 200}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -69,6 +69,42 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -79,56 +115,8 @@ TextureImporter:
   spriteSheet:
     serializedVersion: 2
     sprites: []
-    outline:
-    - - {x: -622, y: -405}
-      - {x: -624, y: -407}
-      - {x: -624, y: -535}
-      - {x: -622, y: -537}
-      - {x: -366, y: -537}
-      - {x: -364, y: -535}
-      - {x: -364, y: -407}
-      - {x: -366, y: -405}
-    - - {x: -686, y: 818}
-      - {x: -849, y: 672}
-      - {x: -850, y: 457}
-      - {x: -687, y: 300}
-      - {x: -301, y: 301}
-      - {x: -141, y: 458}
-      - {x: -143, y: 676}
-      - {x: -306, y: 818}
-    - - {x: 402, y: 619}
-      - {x: 400, y: 617}
-      - {x: 400, y: 489}
-      - {x: 402, y: 487}
-      - {x: 658, y: 487}
-      - {x: 660, y: 489}
-      - {x: 660, y: 617}
-      - {x: 658, y: 619}
-    physicsShape:
-    - - {x: -622, y: -405}
-      - {x: -624, y: -407}
-      - {x: -624, y: -535}
-      - {x: -622, y: -537}
-      - {x: -366, y: -537}
-      - {x: -364, y: -535}
-      - {x: -364, y: -407}
-      - {x: -366, y: -405}
-    - - {x: -683, y: 817}
-      - {x: -849, y: 679}
-      - {x: -850, y: 455}
-      - {x: -692, y: 302}
-      - {x: -301, y: 303}
-      - {x: -143, y: 458}
-      - {x: -144, y: 682}
-      - {x: -314, y: 818}
-    - - {x: 402, y: 619}
-      - {x: 400, y: 617}
-      - {x: 400, y: 489}
-      - {x: 402, y: 487}
-      - {x: 658, y: 487}
-      - {x: 660, y: 489}
-      - {x: 660, y: 617}
-      - {x: 658, y: 619}
+    outline: []
+    physicsShape: []
     bones:
     - name: bone_1
       guid: 97c022ba35e058844a26b5773f472a2c
