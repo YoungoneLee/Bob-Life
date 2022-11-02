@@ -18,7 +18,7 @@ public class PlayerScript : MonoBehaviour
 
     //for alternating keys
     bool keyAlternate = false;
-    int speed = 100;
+    public int speed = 100;
 
     private void Awake()
     {
@@ -48,20 +48,17 @@ public class PlayerScript : MonoBehaviour
 
         if (isAlive) {
             score += Time.deltaTime * 4;
-            ScoreTxt.text = "Score: " + score.ToString("F");
+            ScoreTxt.text = "Speed Score: " + score.ToString("F");
+            transform.position += new Vector3(-0.001f, 0, 0) * Time.deltaTime * speed;
         }
 
-
-        //alt button mashing
+        //alt buttom mashing
         if (Input.GetKeyDown(KeyCode.RightArrow) && keyAlternate == false)
         {
-            Debug.Log("within first statement");
-            //transform.position += transform.forward * speed * Time.deltaTime;
-            transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * speed;
-            Debug.Log("after 1 Transform");
+            Debug.Log("first key touched");
             keyAlternate = true;
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow) && keyAlternate == true)
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && keyAlternate == true)
         {
             Debug.Log("within second statement");
             //transform.position += transform.forward * speed * Time.deltaTime;
