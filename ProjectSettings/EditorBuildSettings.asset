@@ -8,4 +8,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HubScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/GourmetRaceScene.unity
+    guid: 306f9cecc13c84b8ebb08390917bd9ef
+  - enabled: 1
+    path: Assets/Scenes/JumpingScene.unity
+    guid: 17216578f520f4d62acec3ebc665acdf
+  - enabled: 1
+    path: Assets/Scenes/RunningScene.unity
+    guid: f3896c55dede540578a6516993a70513
+  - enabled: 1
+    path: Assets/Scenes/ClimbingScene.unity
+    guid: 897725319c013462d8e5e14bf07400bc
   m_configObjects: {}
