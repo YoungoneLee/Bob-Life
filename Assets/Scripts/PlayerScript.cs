@@ -32,10 +32,8 @@ public class PlayerScript : MonoBehaviour
         
     }
 
-
     void Update()
     {
-        var movement = Input.GetAxis("Horizontal");
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -49,7 +47,7 @@ public class PlayerScript : MonoBehaviour
         if (isAlive) {
             score += Time.deltaTime * 4;
             ScoreTxt.text = "Speed Score: " + score.ToString("F");
-            transform.position += new Vector3(-0.001f, 0, 0) * Time.deltaTime * speed;
+            transform.position += new Vector3(-0.01f, 0, 0) * Time.deltaTime * speed;
         }
 
         //alt buttom mashing
@@ -62,7 +60,7 @@ public class PlayerScript : MonoBehaviour
         {
             Debug.Log("within second statement");
             //transform.position += transform.forward * speed * Time.deltaTime;
-            transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * speed;
+            transform.position += new Vector3(0.3f, 0, 0) * Time.deltaTime * speed;
             Debug.Log("after 2 Transform");
             keyAlternate = false;
         }
