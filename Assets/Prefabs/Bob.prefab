@@ -116,14 +116,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6852588862568688694}
-  m_LocalRotation: {x: 0, y: 0, z: 0.019414864, w: 0.9998116}
+  m_LocalRotation: {x: -0, y: -0, z: 0.019414812, w: 0.9998116}
   m_LocalPosition: {x: 1.2238739, y: -0.000000057573416, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6910200802974948928}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 2.225}
 --- !u!60 &5518822215231847574
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -264,8 +264,8 @@ MonoBehaviour:
   - {fileID: 7458838256926944051}
   - {fileID: 7937330380469273065}
   m_Bounds:
-    m_Center: {x: -4.9746513, y: 5.114585, z: 0}
-    m_Extent: {x: 3.8607252, y: 3.060448, z: 0}
+    m_Center: {x: -4.974658, y: 5.187836, z: 0}
+    m_Extent: {x: 3.860716, y: 3.1337247, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0

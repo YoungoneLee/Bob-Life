@@ -45,9 +45,9 @@ TextureImporter:
   spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  alignment: 9
+  spritePivot: {x: 0.26535535, y: 0.6334252}
+  spritePixelsToUnits: 256
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -120,8 +120,8 @@ TextureImporter:
     bones:
     - name: bone_1
       guid: 97c022ba35e058844a26b5773f472a2c
-      position: {x: 371.83444, y: -916.642, z: 0}
-      rotation: {x: 0, y: 0, z: -0.69391483, w: 0.7200571}
+      position: {x: 316.8129, y: -921.0468, z: 0}
+      rotation: {x: 0, y: 0, z: -0.70789, w: 0.7063228}
       length: 218.81543
       parentId: 1
       color:
@@ -129,27 +129,27 @@ TextureImporter:
         rgba: 4278190335
     - name: bone_3
       guid: 22ad05a26fcd25f4fa10704c6e88e819
-      position: {x: 525, y: 1240, z: 0}
-      rotation: {x: 0, y: 0, z: 0.69391483, w: 0.7200571}
-      length: 122.38735
+      position: {x: 534.42267, y: 1258.8447, z: 0}
+      rotation: {x: 0, y: 0, z: 0.70789, w: 0.7063228}
+      length: 89.312225
       parentId: -1
       color:
         serializedVersion: 2
         rgba: 4278255360
     - name: bone_2
       guid: 0a072d66c6c333745b2e133a7b8b38cf
-      position: {x: -683.1626, y: -130.45032, z: 0}
-      rotation: {x: 0, y: 0, z: 0.72005713, w: 0.6939148}
-      length: 232.01804
+      position: {x: -701.846, y: -84.70865, z: 0}
+      rotation: {x: 0, y: 0, z: 0.713773, w: 0.7003772}
+      length: 222.64302
       parentId: 1
       color:
         serializedVersion: 2
         rgba: 4278255615
     - name: bone_4
       guid: 245c9b9b880fd204686d6ab40fcda620
-      position: {x: 122.38738, y: -0.0000057573416, z: 0}
-      rotation: {x: 0, y: 0, z: 0.019414864, w: 0.9998116}
-      length: 478.27313
+      position: {x: 79.90238, y: 0.00964684, z: 0}
+      rotation: {x: 0, y: 0, z: 0.007802958, w: 0.99996954}
+      length: 474.46994
       parentId: 1
       color:
         serializedVersion: 2
