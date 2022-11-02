@@ -16,6 +16,10 @@ public class PlayerScript : MonoBehaviour
 
     public Text ScoreTxt;
 
+    //for alternating keys
+    bool keyAlternate = false;
+    int speed = 100;
+
     private void Awake()
     {
         RB = GetComponent<Rigidbody2D>();
@@ -28,10 +32,12 @@ public class PlayerScript : MonoBehaviour
         
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        var movement = Input.GetAxis("Horizontal");
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if(isGrounded == true)
             {
@@ -43,6 +49,25 @@ public class PlayerScript : MonoBehaviour
         if (isAlive) {
             score += Time.deltaTime * 4;
             ScoreTxt.text = "Score: " + score.ToString("F");
+        }
+
+
+        //alt button mashing
+        if (Input.GetKeyDown(KeyCode.RightArrow) && keyAlternate == false)
+        {
+            Debug.Log("within first statement");
+            //transform.position += transform.forward * speed * Time.deltaTime;
+            transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * speed;
+            Debug.Log("after 1 Transform");
+            keyAlternate = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow) && keyAlternate == true)
+        {
+            Debug.Log("within second statement");
+            //transform.position += transform.forward * speed * Time.deltaTime;
+            transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * speed;
+            Debug.Log("after 2 Transform");
+            keyAlternate = false;
         }
     }
 
