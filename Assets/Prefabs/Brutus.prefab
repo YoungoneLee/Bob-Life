@@ -70,6 +70,7 @@ GameObject:
   - component: {fileID: 4728904633763904576}
   - component: {fileID: 89423174147833718}
   - component: {fileID: 5328660088894696904}
+  - component: {fileID: 1662223299}
   m_Layer: 0
   m_Name: Brutus
   m_TagString: Untagged
@@ -170,8 +171,8 @@ MonoBehaviour:
   - {fileID: 383448247735487400}
   - {fileID: 7320065086166538040}
   m_Bounds:
-    m_Center: {x: -8.71669, y: 11.005186, z: 0}
-    m_Extent: {x: 5.505301, y: 3.2897363, z: 0}
+    m_Center: {x: -8.716687, y: 11.005186, z: 0}
+    m_Extent: {x: 5.5053034, y: 3.2897375, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -196,6 +197,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &1662223299
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605798984692586095}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 75400acc4c6941e479d85b59b9f84515, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2007744304780079017
 GameObject:
   m_ObjectHideFlags: 0
