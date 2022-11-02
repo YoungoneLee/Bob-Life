@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ground
   - newLine
+  - finishLine
   layers:
   - Default
   - TransparentFX

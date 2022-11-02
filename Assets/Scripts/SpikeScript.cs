@@ -20,7 +20,7 @@ public class SpikeScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("newLine")) spikeGenerator.generateSpike();
+        if (collision.gameObject.CompareTag("newLine")) spikeGenerator.GenerateNextSpikeWithGap();
         if (collision.gameObject.CompareTag("finishLine")) Destroy(this.gameObject);
 
     }

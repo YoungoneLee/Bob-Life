@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -7933059682205171219}
   m_Layer: 0
   m_Name: Spike
-  m_TagString: Untagged
+  m_TagString: spike
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 7716183643953566713}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.65, y: -3.5, z: 0}
-  m_LocalScale: {x: 0.52041906, y: 1.415443, z: 1}
+  m_LocalScale: {x: 0.33374476, y: 0.8021315, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
