@@ -18,7 +18,7 @@ public class PlayerScript : MonoBehaviour
 
     //for alternating keys
     bool keyAlternate = false;
-    public int speed = 100;
+    public int speed = 200;
 
     private void Awake()
     {
@@ -46,8 +46,12 @@ public class PlayerScript : MonoBehaviour
 
         if (isAlive) {
             score += Time.deltaTime * 4;
-            ScoreTxt.text = "Speed Score: " + score.ToString("F");
+            ScoreTxt.text = "Speed Score: " + score.ToString();
             transform.position += new Vector3(-0.01f, 0, 0) * Time.deltaTime * speed;
+        }
+        else
+        {
+            ScoreTxt.text = "Speed Score: " + score.ToString();
         }
 
         //alt buttom mashing
@@ -60,7 +64,7 @@ public class PlayerScript : MonoBehaviour
         {
             Debug.Log("within second statement");
             //transform.position += transform.forward * speed * Time.deltaTime;
-            transform.position += new Vector3(0.3f, 0, 0) * Time.deltaTime * speed;
+            transform.position += new Vector3(0.6f, 0, 0) * Time.deltaTime * speed;
             Debug.Log("after 2 Transform");
             keyAlternate = false;
         }
