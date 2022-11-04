@@ -7,9 +7,12 @@ public class SpikeGenerator : MonoBehaviour
 
     public GameObject spike;
 
-    public float MinSpeed;
-    public float MaxSpeed;
-    public float currentSpeed;
+    [HideInInspector]
+    public float MinSpeed = 5;
+    [HideInInspector]
+    public float MaxSpeed = 20;
+    [HideInInspector]
+    public float currentSpeed = 0;
 
     public float SpeedMultiplier;
     void Awake()
