@@ -10,12 +10,16 @@ public class StrengthEffectObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        lifetime = Time.time + 1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Destroy(gameObject, lifetime);
+        if(lifetime <= Time.time)
+        {
+            Destroy(gameObject);
+        }
+        
     }
 }
