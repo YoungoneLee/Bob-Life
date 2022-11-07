@@ -49,7 +49,7 @@ public class NoteObject : MonoBehaviour
                     StrengthGameManager.instance.PerfectHit();
                     Instantiate(perfectEffect, transform.position, perfectEffect.transform.rotation);
                 }
-                else if(distFromCenter < 0.15)
+                else if(distFromCenter < 0.20)
                 {
                     Debug.Log("Good");
                     StrengthGameManager.instance.GoodHit();
@@ -93,7 +93,7 @@ public class NoteObject : MonoBehaviour
         if(other.tag == "Activator" && transform.position.y < -4.45)
         {
             //Debug.Log("Exited collider on game object: "+ other.gameObject.name);
-            Debug.Log("MissedYpos: " + transform.position.y);
+            //Debug.Log("MissedYpos: " + transform.position.y);
             canBePressed = false;
             StrengthGameManager.instance.NoteMissed();
             //Instantiate(missedEffect,transform.position, missedEffect.transform.rotation);
