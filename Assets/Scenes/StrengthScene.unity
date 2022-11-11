@@ -324,6 +324,19 @@ MonoBehaviour:
   multiplierThresholds: 040000000800000010000000
   scoreText: {fileID: 476621284}
   multiText: {fileID: 1979793839}
+  totalNotes: 0
+  normalHits: 0
+  goodHits: 0
+  perfectHits: 0
+  missedHits: 0
+  resultsScreen: {fileID: 1589673552}
+  percentHitText: {fileID: 27218128}
+  normalsText: {fileID: 306761737}
+  goodsText: {fileID: 2029381968}
+  perfectsText: {fileID: 31293382}
+  missesText: {fileID: 687341225}
+  rankText: {fileID: 1258792465}
+  finalScoreText: {fileID: 1354610764}
 --- !u!4 &161489813
 Transform:
   m_ObjectHideFlags: 0
@@ -869,7 +882,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beatTempo: 120
   hasStarted: 0
-  noteList: []
+  numNotes: 20
   leftNote: {fileID: 7763858081554345237, guid: f5a1baae149d7ca4ea453ed3934ebc2e, type: 3}
   upNote: {fileID: 6900687519291067968, guid: c8636be1949149f4fac163d72f9fa025, type: 3}
   downNote: {fileID: 4825934778596692057, guid: 774c23e772235bd4ebead431eea9485d, type: 3}

@@ -50,7 +50,7 @@ public class StrengthButtons : MonoBehaviour
         if(other.tag == "Untagged")
         {
             canBePressed = true;
-            Debug.Log("ButtonCanBePressed");
+            //Debug.Log("ButtonCanBePressed");
         }
     }
 

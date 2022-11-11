@@ -31,6 +31,15 @@ public class StrengthGameManager : MonoBehaviour
     public Text scoreText;
     public Text multiText;
 
+    public float totalNotes;
+    public float normalHits;
+    public float goodHits;
+    public float perfectHits;
+    public float missedHits;
+
+    public GameObject resultsScreen;
+    public Text percentHitText, normalsText, goodsText, perfectsText, missesText, rankText, finalScoreText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,7 +59,57 @@ public class StrengthGameManager : MonoBehaviour
                 startPlaying = true;
                 theBS.hasStarted = true;
                 
+                totalNotes = FindObjectsOfType<NoteObject>().Length;
+
                 //theMusic.Play();
+            }
+        }
+        else
+        {
+            //Debug.Log("" + FindObjectsOfType<NoteObject>().Length);
+            if(FindObjectsOfType<NoteObject>().Length == 0 && !resultsScreen.activeInHierarchy)
+            {
+                resultsScreen.SetActive(true);
+                normalsText.text = "" + normalHits;
+                goodsText.text = goodHits.ToString();
+                perfectsText.text = "" + perfectHits;
+                missesText.text = "" + missedHits;
+
+                float extraMisses = missedHits - (totalNotes - normalHits - goodHits - perfectHits);
+                
+                float percentHit = (100f * (normalHits + goodHits + perfectHits) / (totalNotes + extraMisses));
+                percentHitText.text = "" + percentHit.ToString("F1") + "%";
+                
+                string rankVal = "F";
+                
+                if(percentHit >= 99)
+                {
+                    rankVal = "EPICPOG";
+                }
+                else if(percentHit >= 95)
+                {
+                    rankVal = "S";
+                }
+                else if(percentHit >= 90)
+                {
+                    rankVal = "A";
+                }
+                else if(percentHit >= 80)
+                {
+                    rankVal = "B";
+                }
+                else if(percentHit >= 60)
+                {
+                    rankVal = "C";
+                }
+                else if(percentHit >= 40)
+                {
+                    rankVal = "D";
+                }               
+
+                rankText.text = rankVal;
+
+                finalScoreText.text = "" + currentScore;
             }
         }
     }
@@ -81,18 +140,24 @@ public class StrengthGameManager : MonoBehaviour
     {
         currentScore += scorePerNote * currentMultiplier;
         NoteHit();
+
+        normalHits++;
     }
 
     public void GoodHit()
     {
         currentScore += scorePerGoodNote * currentMultiplier;
         NoteHit();
+
+        goodHits++;
     }
 
     public void PerfectHit()
     {
         currentScore += scorePerPerfectNote * currentMultiplier;
         NoteHit();
+        
+        perfectHits++;
     }
 
     public void NoteMissed()
@@ -103,5 +168,7 @@ public class StrengthGameManager : MonoBehaviour
         multiplierTracker = 0;
 
         multiText.text = "Multiplier: x" + currentMultiplier;
+
+        missedHits++;
     }
 }

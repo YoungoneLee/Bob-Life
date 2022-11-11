@@ -45,20 +45,20 @@ public class NoteObject : MonoBehaviour
 
                 if(distFromCenter < 0.05)
                 {
-                    Debug.Log("Perfect");
+                    //Debug.Log("Perfect");
                     StrengthGameManager.instance.PerfectHit();
                     Instantiate(perfectEffect, transform.position, perfectEffect.transform.rotation);
                 }
                 else if(distFromCenter < 0.20)
                 {
-                    Debug.Log("Good");
+                    //Debug.Log("Good");
                     StrengthGameManager.instance.GoodHit();
                     Instantiate(goodEffect, transform.position, goodEffect.transform.rotation);
 
                 }
                 else if(distFromCenter < 0.45)
                 {
-                    Debug.Log("Normal");
+                    //Debug.Log("Normal");
                     StrengthGameManager.instance.NormalHit();
                     Instantiate(hitEffect, transform.position, hitEffect.transform.rotation);
 

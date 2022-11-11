@@ -9,7 +9,7 @@ public class BeatScroller : MonoBehaviour
 
     public bool hasStarted;
 
-    public NoteObject[] noteList;
+    public int numRandomRolls = 20;
 
     public GameObject leftNote, upNote, downNote, rightNote;
 
@@ -45,7 +45,7 @@ public class BeatScroller : MonoBehaviour
     {
         float r = 0;
 
-        for(int i = 0; i < 20; i++)
+        for(int i = 0; i < numRandomRolls; i++)
         {
             r = Random.Range(1,5);
 
