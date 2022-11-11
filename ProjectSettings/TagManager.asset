@@ -8,6 +8,7 @@ TagManager:
   - newLine
   - finishLine
   - spike
+  - Activator
   layers:
   - Default
   - TransparentFX
@@ -45,6 +46,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Arrows
+  - name: Background
     uniqueID: 156158459
+    locked: 0
+  - name: Terrain
+    uniqueID: 2100092283
     locked: 0
