@@ -9,6 +9,7 @@ TagManager:
   - finishLine
   - spike
   - Activator
+  - jumpTag
   layers:
   - Default
   - TransparentFX
@@ -51,4 +52,7 @@ TagManager:
     locked: 0
   - name: Terrain
     uniqueID: 2100092283
+    locked: 0
+  - name: Player
+    uniqueID: 2000155325
     locked: 0
