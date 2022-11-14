@@ -47,7 +47,7 @@ public class BeatScroller : MonoBehaviour
 
         for(int i = 0; i < numRandomRolls; i++)
         {
-            r = Random.Range(1,5);
+            r = Random.Range(1,11);
 
             //Instantiate(goodEffect, transform.position, goodEffect.transform.rotation);
 
@@ -63,6 +63,30 @@ public class BeatScroller : MonoBehaviour
                     Instantiate(downNote, new Vector3(0.5f, (float)i, 0), downNote.transform.rotation, transform);
                     break;
                 case 4:
+                    Instantiate(rightNote, new Vector3(1.5f, (float)i, 0), rightNote.transform.rotation, transform);
+                    break;
+                case 5: //L U
+                    Instantiate(leftNote, new Vector3(-1.5f, (float)i, 0), leftNote.transform.rotation, transform);
+                    Instantiate(upNote, new Vector3(-0.5f, (float)i, 0), upNote.transform.rotation, transform);
+                    break;
+                case 6: //L D
+                    Instantiate(leftNote, new Vector3(-1.5f, (float)i, 0), leftNote.transform.rotation, transform);
+                    Instantiate(downNote, new Vector3(0.5f, (float)i, 0), downNote.transform.rotation, transform);
+                    break;
+                case 7: //L R
+                    Instantiate(leftNote, new Vector3(-1.5f, (float)i, 0), leftNote.transform.rotation, transform);
+                    Instantiate(rightNote, new Vector3(1.5f, (float)i, 0), rightNote.transform.rotation, transform);
+                    break;
+                case 8: //U D
+                    Instantiate(upNote, new Vector3(-0.5f, (float)i, 0), upNote.transform.rotation, transform);
+                    Instantiate(downNote, new Vector3(0.5f, (float)i, 0), downNote.transform.rotation, transform);
+                    break;
+                case 9: //U R
+                    Instantiate(upNote, new Vector3(-0.5f, (float)i, 0), upNote.transform.rotation, transform);
+                    Instantiate(rightNote, new Vector3(1.5f, (float)i, 0), rightNote.transform.rotation, transform);
+                    break;
+                case 10://D R
+                    Instantiate(downNote, new Vector3(0.5f, (float)i, 0), downNote.transform.rotation, transform);
                     Instantiate(rightNote, new Vector3(1.5f, (float)i, 0), rightNote.transform.rotation, transform);
                     break;
                 default:

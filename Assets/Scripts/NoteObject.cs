@@ -96,6 +96,7 @@ public class NoteObject : MonoBehaviour
             //Debug.Log("MissedYpos: " + transform.position.y);
             canBePressed = false;
             StrengthGameManager.instance.NoteMissed();
+            gameObject.SetActive(false);
             //Instantiate(missedEffect,transform.position, missedEffect.transform.rotation);
             Instantiate(missEffect, transform.position, missEffect.transform.rotation);
 

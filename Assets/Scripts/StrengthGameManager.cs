@@ -37,13 +37,29 @@ public class StrengthGameManager : MonoBehaviour
     public float perfectHits;
     public float missedHits;
 
+    //Reaction Test
+    [SerializeField]
+    private Text readyText, pressText;
+
+    //[SerializeField]
+    //private SpriteRenderer whiteRect;
+
+    private float reactionTime, startTime, randomDelay;
+
+    private bool clockIsTicking, timerCanBeStopped;
+
     public GameObject resultsScreen;
-    public Text percentHitText, normalsText, goodsText, perfectsText, missesText, rankText, finalScoreText;
+    public Text percentHitText, normalsText, goodsText, perfectsText, missesText, reactionSpeedText, rankText, finalScoreText;
 
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
+
+        reactionTime = 0f;
+        startTime = 0f;
+        clockIsTicking = false;
+        timerCanBeStopped = true;
 
         scoreText.text = "Score: 0";
         currentMultiplier = 1;
@@ -66,61 +82,39 @@ public class StrengthGameManager : MonoBehaviour
         }
         else
         {
-            //Debug.Log("" + FindObjectsOfType<NoteObject>().Length);
             if(FindObjectsOfType<NoteObject>().Length == 0 && !resultsScreen.activeInHierarchy)
             {
-                resultsScreen.SetActive(true);
-                normalsText.text = "" + normalHits;
-                goodsText.text = goodHits.ToString();
-                perfectsText.text = "" + perfectHits;
-                missesText.text = "" + missedHits;
+                //Reaction Test
+                if(!clockIsTicking && !resultsScreen.activeInHierarchy)
+                {
+                    StartCoroutine(startRandomTimer());
+                    clockIsTicking = true;
+                    timerCanBeStopped = false;
+                }
+                else if(Input.GetKeyDown(KeyCode.Space) && clockIsTicking && timerCanBeStopped)
+                {
+                    StopCoroutine(startRandomTimer());
+                    reactionTime = Time.time - startTime;
+                    if(reactionTime <= 2f)
+                    {
+                        currentScore = (int)((double)currentScore * (1.5 - reactionTime * 0.25));
+                    }
+                    showResults();
+                }
+                else if(Input.GetKeyDown(KeyCode.Space) && clockIsTicking && !timerCanBeStopped)
+                {
+                    StopCoroutine(startRandomTimer());
+                    reactionTime = -1f;
+                    showResults();
+                }
 
-                float extraMisses = missedHits - (totalNotes - normalHits - goodHits - perfectHits);
-                
-                float percentHit = (100f * (normalHits + goodHits + perfectHits) / (totalNotes + extraMisses));
-                percentHitText.text = "" + percentHit.ToString("F1") + "%";
-                
-                string rankVal = "F";
-                
-                if(percentHit >= 99)
-                {
-                    rankVal = "EPICPOG";
-                }
-                else if(percentHit >= 95)
-                {
-                    rankVal = "S";
-                }
-                else if(percentHit >= 90)
-                {
-                    rankVal = "A";
-                }
-                else if(percentHit >= 80)
-                {
-                    rankVal = "B";
-                }
-                else if(percentHit >= 60)
-                {
-                    rankVal = "C";
-                }
-                else if(percentHit >= 40)
-                {
-                    rankVal = "D";
-                }               
-
-                rankText.text = rankVal;
-
-                finalScoreText.text = "" + currentScore;
             }
         }
     }
 
     public void NoteHit()
     {
-        //Debug.Log("Hit");
-
-
-        // currentScore += scorePerNote * currentMultiplier;
-        scoreText.text = "Score: " + currentScore;
+        scoreText.text = "Note Score: " + currentScore;
 
         if(currentMultiplier - 1 < multiplierThresholds.Length)
         {
@@ -162,13 +156,93 @@ public class StrengthGameManager : MonoBehaviour
 
     public void NoteMissed()
     {
-        //Debug.Log("Missed");
-
         currentMultiplier = 1;
         multiplierTracker = 0;
 
         multiText.text = "Multiplier: x" + currentMultiplier;
 
         missedHits++;
+    }
+
+    public void showResults()
+    {
+        readyText.gameObject.SetActive(false);
+        pressText.gameObject.SetActive(false);
+
+
+        resultsScreen.SetActive(true);
+        normalsText.text = "" + normalHits;
+        goodsText.text = goodHits.ToString();
+        perfectsText.text = "" + perfectHits;
+        missesText.text = "" + missedHits;
+
+        float extraMisses = missedHits - (totalNotes - normalHits - goodHits - perfectHits);
+        
+        float percentHit = (100f * (normalHits + goodHits + perfectHits) / (totalNotes + extraMisses));
+        percentHitText.text = "" + percentHit.ToString("F1") + "%";
+        
+        string rankVal = "F";
+        
+        if(percentHit >= 99)
+        {
+            rankVal = "EPICPOG";
+        }
+        else if(percentHit >= 95)
+        {
+            rankVal = "S";
+        }
+        else if(percentHit >= 90)
+        {
+            rankVal = "A";
+        }
+        else if(percentHit >= 80)
+        {
+            rankVal = "B";
+        }
+        else if(percentHit >= 60)
+        {
+            rankVal = "C";
+        }
+        else if(percentHit >= 40)
+        {
+            rankVal = "D";
+        }
+
+        if(reactionTime == -1f)
+        {
+            reactionSpeedText.text = "Too Early!";
+        }
+        else
+        {
+            reactionSpeedText.text = "" + reactionTime.ToString("F3");
+        }
+
+        rankText.text = rankVal;
+
+        finalScoreText.text = "" + currentScore;
+
+    }
+
+    IEnumerator startRandomTimer()
+    {
+        yield return new WaitForSecondsRealtime(1f);
+        readyText.text = "Get Ready";
+        readyText.gameObject.SetActive(true);
+
+        clockIsTicking = true;
+        timerCanBeStopped = false;
+
+
+        randomDelay = Random.Range(2f, 5f);
+        yield return new WaitForSecondsRealtime(randomDelay);
+
+
+        if(!resultsScreen.activeInHierarchy)
+        {
+            pressText.gameObject.SetActive(true);
+        }
+        startTime = Time.time;
+        clockIsTicking = true;
+        timerCanBeStopped = true;
     }
 }
