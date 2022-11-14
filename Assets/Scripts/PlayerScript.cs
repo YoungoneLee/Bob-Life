@@ -39,8 +39,6 @@ public class PlayerScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-
-        
         Debug.Log(RB.velocity.x);
 
         if (isAlive)
