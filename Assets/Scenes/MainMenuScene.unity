@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 113201756}
   - component: {fileID: 113201757}
   m_Layer: 0
-  m_Name: highresBob (1)
+  m_Name: StoryScreenBob
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -992,7 +992,7 @@ GameObject:
   - component: {fileID: 514684447}
   - component: {fileID: 514684448}
   m_Layer: 0
-  m_Name: highresBrutus (1)
+  m_Name: StoryScreenBrutus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1315,7 +1315,7 @@ GameObject:
   - component: {fileID: 1450471608}
   - component: {fileID: 1450471609}
   m_Layer: 0
-  m_Name: bobbette (1)
+  m_Name: StoryScreenBobbette
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2019,7 +2019,7 @@ GameObject:
   - component: {fileID: 1815142334}
   - component: {fileID: 1815142335}
   m_Layer: 0
-  m_Name: spr_bike_0
+  m_Name: StoryScreenBike
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
