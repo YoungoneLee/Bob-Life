@@ -10,6 +10,9 @@ TagManager:
   - spike
   - Activator
   - jumpTag
+  - brutus
+  - bob
+  - blocks
   layers:
   - Default
   - TransparentFX
