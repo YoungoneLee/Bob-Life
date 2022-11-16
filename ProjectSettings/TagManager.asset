@@ -9,6 +9,7 @@ TagManager:
   - finishLine
   - spike
   - Activator
+  - DoodlePlatform
   layers:
   - Default
   - TransparentFX
