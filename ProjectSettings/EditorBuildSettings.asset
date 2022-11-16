@@ -17,7 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RunningScene.unity
     guid: f3896c55dede540578a6516993a70513
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/ClimbingScene.unity
-    guid: 897725319c013462d8e5e14bf07400bc
+    path: Assets/Scenes/DoodleEndScene.unity
+    guid: f8911c04bf62c48f1b9acb7105306480
   m_configObjects: {}
