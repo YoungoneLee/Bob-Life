@@ -1,15 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class GourmetPlayerMovement : MonoBehaviour
-{
 
-    public int statsSpeed = 10;
-    public int jumpForce = 500;
-    public int statsStength = 10;
+public class GourmetEnermy : MonoBehaviour
+{
+    public int enemySpeed = 10;
+    public int enemyJump = 500;
+    public int enemyStrength = 10;
 
     bool jumpTriggered = false;
     bool isGrounded = false;
@@ -17,21 +15,20 @@ public class GourmetPlayerMovement : MonoBehaviour
     Rigidbody2D RB;
 
     //for the time
-    float time;
-    public Text timeTxt;
+    float enemyTime;
+    public Text enemyTimeTxt;
 
     //for hitting the blocks
     public int hit;
-    public int brutusHits;
+    public int enemyHits;
     public int bobHits;
     GameObject bob;
     GameObject brutus;
     public GameObject blocks;
 
-
     private void Awake()
     {
-        time = 0;
+        enemyTime = 0;
     }
 
     // Start is called before the first frame update
@@ -40,51 +37,43 @@ public class GourmetPlayerMovement : MonoBehaviour
         hit = 13;
         RB = GetComponent<Rigidbody2D>();
         bob = GameObject.FindGameObjectWithTag("bob");
-        brutus = GameObject.FindGameObjectWithTag("brutus");
-        blocks = GameObject.FindGameObjectWithTag("bs1");
+        blocks = GameObject.FindGameObjectWithTag("blocks");
         Physics2D.IgnoreCollision(bob.GetComponent<Collider2D>(), GetComponent<Collider2D>());
 
-        Debug.Log("hits:" + hit);
-        //brutusHits = hit - statsStength;
-        bobHits = hit - statsStength;
-        Debug.Log("bobHits" + bobHits);
+        enemyHits = hit - enemyStrength;
     }
 
     private void FixedUpdate()
     {
-        time += Time.deltaTime;
-        timeTxt.text = "Speed Score: " + time.ToString("F");
+        enemyTime += Time.deltaTime;
+        enemyTimeTxt.text = "Brutus Speed Score: " + enemyTime.ToString("F");
 
-        if (isGrounded && !jumpTriggered) {
-            RB.AddForce(transform.right * statsSpeed);
+        if (isGrounded && !jumpTriggered)
+        {
+            RB.AddForce(transform.right * enemySpeed);
         }
 
         if (jumpTriggered)
         {
             RB.velocity = new Vector3(0, 0, 0);
-            RB.AddForce(transform.up * jumpForce);
+            RB.AddForce(transform.up * enemyJump);
             Debug.Log("jumped");
             jumpTriggered = false;
         }
 
-        if (bobHits == 0) Destroy(blocks);
+        if (enemyHits == 0) Destroy(blocks);
     }
+
     // Update is called once per frame
     void Update()
     {
         Physics2D.IgnoreCollision(RB.GetComponent<Collider2D>(), GetComponent<Collider2D>());
     }
 
-    public void gameOver()
-    {
-        SceneManager.LoadScene("RunningGameOver");
-    }
-
-    IEnumerator WaitFunction()
-    {
-        yield return new WaitForSeconds(3);
-        gameOver();
-    }
+    //public void gameOver()
+    //{
+    //    SceneManager.LoadScene("RunningGameOver");
+    //}
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -102,15 +91,15 @@ public class GourmetPlayerMovement : MonoBehaviour
             }
         }
 
-        if(collision.gameObject.CompareTag("bs1")) {
-            Debug.Log("bobHits remaining: " + bobHits);
-            bobHits -= 1;
-            Destroy(blocks);
+        if (collision.gameObject.CompareTag("blocks"))
+        {
+            enemyHits -= 1;
         }
 
-        if (collision.gameObject.CompareTag("gFinishLine"))
-        {
-            StartCoroutine(WaitFunction());
-        }
+        //if (collision.gameObject.CompareTag("gFinishLine"))
+        //{
+        //    gameOver();
+        //}
     }
+
 }
