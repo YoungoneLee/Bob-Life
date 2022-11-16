@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 
 public class GourmetPlayerMovement : MonoBehaviour
 {
@@ -75,6 +75,11 @@ public class GourmetPlayerMovement : MonoBehaviour
         Physics2D.IgnoreCollision(RB.GetComponent<Collider2D>(), GetComponent<Collider2D>());
     }
 
+    public void gameOver()
+    {
+        SceneManager.LoadScene("RunningGameOver");
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("jumpTag"))
@@ -101,6 +106,11 @@ public class GourmetPlayerMovement : MonoBehaviour
         {
             brutusHits -= 1;
             Debug.Log("Brutus Hits: " + brutusHits);
+        }
+
+        if (collision.gameObject.CompareTag("gFinishLine"))
+        {
+            gameOver();
         }
     }
 }

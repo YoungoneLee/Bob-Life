@@ -13,6 +13,7 @@ TagManager:
   - brutus
   - bob
   - blocks
+  - gFinishLine
   layers:
   - Default
   - TransparentFX
