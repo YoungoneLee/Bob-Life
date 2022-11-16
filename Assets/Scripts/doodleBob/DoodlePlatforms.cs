@@ -18,9 +18,12 @@ public class DoodlePlatforms : MonoBehaviour
                 Vector2 velocity = rb.velocity;
                 velocity.y = jumpForce;
                 rb.velocity = velocity;
-                Bob.score += 100;
-                Score.text = "Score: " + Bob.score.ToString("0");
-                PlayerPrefs.SetFloat("score", Bob.score);
+                if( !hasHit) {
+                    hasHit = true;
+                    Bob.score += 100;
+                    Score.text = "Score: " + Bob.score.ToString("0");
+                    PlayerPrefs.SetFloat("score", Bob.score);
+                }
             }
             
         }
