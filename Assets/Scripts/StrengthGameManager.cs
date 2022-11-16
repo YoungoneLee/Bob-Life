@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class StrengthGameManager : MonoBehaviour
 {
@@ -183,6 +184,7 @@ public class StrengthGameManager : MonoBehaviour
         
         string rankVal = "F";
         
+        /*
         if(percentHit >= 99)
         {
             rankVal = "EPICPOG";
@@ -204,6 +206,36 @@ public class StrengthGameManager : MonoBehaviour
             rankVal = "C";
         }
         else if(percentHit >= 40)
+        {
+            rankVal = "D";
+        }
+        */
+
+        //Debug.Log("isBrutal = " + theBS.isBrutal);
+        //Debug.Log("currentScore = " + currentScore);
+
+        //RANKINGS UPDATE
+        if((!theBS.isBrutal && currentScore >= 9000) || (theBS.isBrutal && currentScore >= 16000))
+        {
+            rankVal = "EPICPOG";
+        }
+        else if((!theBS.isBrutal && currentScore >= 8000) || (theBS.isBrutal && currentScore >= 14000))
+        {
+            rankVal = "S";
+        }
+        else if((!theBS.isBrutal && currentScore >= 6000) || (theBS.isBrutal && currentScore >= 11000))
+        {
+            rankVal = "A";
+        }
+        else if((!theBS.isBrutal && currentScore >= 4500) || (theBS.isBrutal && currentScore >= 8500))
+        {
+            rankVal = "B";
+        }
+        else if((!theBS.isBrutal && currentScore >= 3000) || (theBS.isBrutal && currentScore >= 6500))
+        {
+            rankVal = "C";
+        }
+        else if((!theBS.isBrutal && currentScore >= 2000) || (theBS.isBrutal && currentScore >= 5000))
         {
             rankVal = "D";
         }
@@ -261,5 +293,10 @@ public class StrengthGameManager : MonoBehaviour
         totalNotes = FindObjectsOfType<NoteObject>().Length;
 
         //theMusic.Play();
+    }
+
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 }
