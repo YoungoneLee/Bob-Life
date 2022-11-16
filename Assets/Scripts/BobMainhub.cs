@@ -115,7 +115,7 @@ public class BobMainhub : MonoBehaviour
 
     public void LoadClimbGame()
     {
-        SceneManager.LoadScene("JumpingScene");
+        SceneManager.LoadScene("DoodleOpenScene");
     }
 
     public void LoadGourmetRace()
