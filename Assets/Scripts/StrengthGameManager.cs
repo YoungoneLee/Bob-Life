@@ -70,15 +70,15 @@ public class StrengthGameManager : MonoBehaviour
     {
         if(!startPlaying)
         {
-            if(Input.anyKeyDown)
-            {
-                startPlaying = true;
-                theBS.hasStarted = true;
+            // if(Input.anyKeyDown)
+            // {
+            //     startPlaying = true;
+            //     theBS.hasStarted = true;
                 
-                totalNotes = FindObjectsOfType<NoteObject>().Length;
+            //     totalNotes = FindObjectsOfType<NoteObject>().Length;
 
-                //theMusic.Play();
-            }
+            //     //theMusic.Play();
+            // }
         }
         else
         {
@@ -244,5 +244,22 @@ public class StrengthGameManager : MonoBehaviour
         startTime = Time.time;
         clockIsTicking = true;
         timerCanBeStopped = true;
+    }
+
+    public void startGame(int difficulty)
+    {
+        startPlaying = true;
+        theBS.hasStarted = true;
+
+        if(difficulty == 2)
+        {
+            theBS.isBrutal = true;
+        }
+        
+        theBS.generateNotes();
+
+        totalNotes = FindObjectsOfType<NoteObject>().Length;
+
+        //theMusic.Play();
     }
 }

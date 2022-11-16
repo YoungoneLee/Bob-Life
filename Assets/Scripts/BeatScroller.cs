@@ -9,6 +9,8 @@ public class BeatScroller : MonoBehaviour
 
     public bool hasStarted;
 
+    public bool isBrutal = false;
+
     public int numRandomRolls = 20;
 
     public GameObject leftNote, upNote, downNote, rightNote;
@@ -17,8 +19,6 @@ public class BeatScroller : MonoBehaviour
     void Start()
     {
         beatTempo = beatTempo / 60f;
-
-        generateNotes();
     }
 
     // Update is called once per frame
@@ -47,7 +47,10 @@ public class BeatScroller : MonoBehaviour
 
         for(int i = 0; i < numRandomRolls; i++)
         {
-            r = Random.Range(1,11);
+            if(isBrutal)
+                r = Random.Range(1,11);
+            else
+                r = Random.Range(1, 5);
 
             //Instantiate(goodEffect, transform.position, goodEffect.transform.rotation);
 
