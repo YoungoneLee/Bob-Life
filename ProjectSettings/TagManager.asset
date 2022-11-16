@@ -8,6 +8,7 @@ TagManager:
   - newLine
   - finishLine
   - spike
+  - Activator
   layers:
   - Default
   - TransparentFX
@@ -47,4 +48,7 @@ TagManager:
     locked: 0
   - name: Arrows
     uniqueID: 156158459
+    locked: 0
+  - name: DifficultyButtons
+    uniqueID: 3884351377
     locked: 0
