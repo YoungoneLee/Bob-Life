@@ -8,15 +8,15 @@ using UnityEngine.SceneManagement;
 public class DoodleBobMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
-    public Camera cam;
-    private BoxCollider2D camBox;
+    // public Camera cam;
+    // private BoxCollider2D camBox;
     public float sizeX, sizeY, ratio;
     float moveX;
     float speed = 12f;
-    public Vector3 screenPos;
+    // public Vector3 screenPos;
     public bool isDead;
-    float height;
-    float width;
+    // float height;
+    // float width;
     
 
     // public Text Score;
@@ -30,10 +30,10 @@ public class DoodleBobMovement : MonoBehaviour
     {
         
         rb = GetComponent<Rigidbody2D>();
-        Camera cam = GetComponent<Camera>();
-        // camBox = GetComponent<BoxCollider2D>();
-        height = cam.orthographicSize;
-        width = height * cam.aspect;
+        // Camera cam = GetComponent<Camera>();
+        // // camBox = GetComponent<BoxCollider2D>();
+        // height = cam.orthographicSize;
+        // width = height * cam.aspect;
 
     }
 
@@ -41,7 +41,7 @@ public class DoodleBobMovement : MonoBehaviour
     void Update()
     {
         moveX = Input.GetAxis("Horizontal") * speed;
-        sizeY = cam.orthographicSize * 2f;
+        // sizeY = cam.orthographicSize * 2f;
         // ratio = (float)Screen.width/(float)Screen.height;
         // sizeX = sizeY * ratio;
         // camBox.size = new Vector2(sizeX, sizeY);
