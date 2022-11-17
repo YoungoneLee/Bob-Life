@@ -9,7 +9,12 @@ TagManager:
   - finishLine
   - spike
   - Activator
-  - DoodlePlatform
+  - jumpTag
+  - brutus
+  - bob
+  - blocks
+  - gFinishLine
+  - bs1
   layers:
   - Default
   - TransparentFX
@@ -47,9 +52,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Arrows
+  - name: Background
     uniqueID: 156158459
     locked: 0
-  - name: DifficultyButtons
-    uniqueID: 3884351377
+  - name: Terrain
+    uniqueID: 2100092283
+    locked: 0
+  - name: Player
+    uniqueID: 2000155325
     locked: 0
