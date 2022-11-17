@@ -15,12 +15,27 @@ EditorBuildSettings:
     path: Assets/Scenes/JumpingScene.unity
     guid: 17216578f520f4d62acec3ebc665acdf
   - enabled: 1
+    path: Assets/Scenes/RunningGameOver.unity
+    guid: 637f62a61ae9f474a8da7ffdd02a8312
+  - enabled: 1
     path: Assets/Scenes/RunningScene.unity
     guid: f3896c55dede540578a6516993a70513
+  - enabled: 1
+    path: Assets/Scenes/MainMenuScene.unity
+    guid: faf32b66078b447639ab7c9e9f08b50d
+  - enabled: 1
+    path: Assets/Scenes/StrengthScene.unity
+    guid: c1fe04f304b468143b030ac2b3a6660e
+  - enabled: 1
+    path: Assets/Scenes/StrengthIntroScene.unity
+    guid: 38ae322236a6f6349a2b4685c188ef49
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/DoodleEndScene.unity
     guid: f8911c04bf62c48f1b9acb7105306480
+  - enabled: 1
+    path: Assets/Scenes/DoodleOpenScene.unity
+    guid: dd482bf7ba0bf4928a1b193d472473c4
   m_configObjects: {}
