@@ -17,7 +17,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RunningScene.unity
     guid: f3896c55dede540578a6516993a70513
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/ClimbingScene.unity
-    guid: 897725319c013462d8e5e14bf07400bc
+    path: Assets/Scenes/StrengthIntroScene.unity
+    guid: 38ae322236a6f6349a2b4685c188ef49
+  - enabled: 1
+    path: Assets/Scenes/StrengthScene.unity
+    guid: c1fe04f304b468143b030ac2b3a6660e
   m_configObjects: {}
