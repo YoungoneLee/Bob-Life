@@ -105,7 +105,7 @@ public class BobMainhub : MonoBehaviour
 
     public void LoadRunGame()
     {
-        SceneManager.LoadScene("RunningScene");
+        SceneManager.LoadScene("RunningOpeningScene");
     }
 
     public void LoadWeightGame()

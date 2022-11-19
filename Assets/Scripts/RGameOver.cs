@@ -9,4 +9,9 @@ public class RGameOver : MonoBehaviour
     {
         SceneManager.LoadScene("HubScene");
     }
+
+    public void RunningScene()
+    {
+        SceneManager.LoadScene("RunningScene");
+    }
 }
