@@ -2,15 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class PlayerScript : MonoBehaviour
 {
-    public float JumpForce;
+    private float JumpForce = 500;
+    private float backSpeed = 15;
     float score;
 
     [SerializeField]
     bool isGrounded = false;
     bool isAlive = true;
+    bool spacePressed = false;
+    bool mashKey = false;
 
     Rigidbody2D RB;
 
@@ -18,7 +23,7 @@ public class PlayerScript : MonoBehaviour
 
     //for alternating keys
     bool keyAlternate = false;
-    public int speed = 200;
+    private int speed = 200;
 
     private void Awake()
     {
@@ -32,41 +37,52 @@ public class PlayerScript : MonoBehaviour
         
     }
 
+    private void FixedUpdate()
+    {
+
+        
+        Debug.Log(RB.velocity.x);
+
+        if (isAlive)
+        {
+            score += Time.deltaTime * 4;
+            //Debug.Log("Running Score: " + score);
+            ScoreTxt.text = "Speed Score: " + score.ToString("F");
+            RB.AddForce(-transform.right * backSpeed);
+        }
+
+        if (spacePressed)
+        {
+            if (isGrounded == true)
+            {
+                RB.AddForce(Vector2.up * JumpForce);
+                isGrounded = false;
+            }
+            spacePressed = false;
+        }
+
+        if(mashKey)
+        {
+            Debug.Log("within Mashkey");
+            RB.AddForce(transform.right * speed);
+            mashKey = false;
+        }
+    }
+
     void Update()
     {
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if(isGrounded == true)
-            {
-                RB.AddForce(Vector2.up * JumpForce);
-                isGrounded = false;
-            }
-        }
-
-        if (isAlive) {
-            score += Time.deltaTime * 4;
-            ScoreTxt.text = "Speed Score: " + score.ToString();
-            transform.position += new Vector3(-0.01f, 0, 0) * Time.deltaTime * speed;
-        }
-        else
-        {
-            ScoreTxt.text = "Speed Score: " + score.ToString();
+            spacePressed = true;
         }
 
         //alt buttom mashing
-        if (Input.GetKeyDown(KeyCode.RightArrow) && keyAlternate == false)
-        {
-            Debug.Log("first key touched");
-            keyAlternate = true;
-        }
+        if (Input.GetKeyDown(KeyCode.RightArrow) && keyAlternate == false) keyAlternate = true;
         if (Input.GetKeyDown(KeyCode.LeftArrow) && keyAlternate == true)
         {
-            Debug.Log("within second statement");
-            //transform.position += transform.forward * speed * Time.deltaTime;
-            transform.position += new Vector3(0.6f, 0, 0) * Time.deltaTime * speed;
-            Debug.Log("after 2 Transform");
             keyAlternate = false;
+            mashKey = true;
         }
     }
 
@@ -81,6 +97,12 @@ public class PlayerScript : MonoBehaviour
         {
             isAlive = false;
             Time.timeScale = 0;
+            gameOver();
         }
+    }
+
+    public void gameOver()
+    {
+        SceneManager.LoadScene("RunningGameOver");
     }
 }
