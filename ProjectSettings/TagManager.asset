@@ -15,6 +15,9 @@ TagManager:
   - blocks
   - gFinishLine
   - bs1
+  - player
+  - leftSide
+  - rightSide
   layers:
   - Default
   - TransparentFX
