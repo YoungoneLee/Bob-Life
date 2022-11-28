@@ -4,6 +4,7 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
+<<<<<<< HEAD
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/HubScene.unity
@@ -41,4 +42,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DoodleOpenScene.unity
     guid: dd482bf7ba0bf4928a1b193d472473c4
+=======
+  m_Scenes: []
+>>>>>>> e87e41a5b98dc7f33d0df2b2f4a7f8f3350ba6d8
   m_configObjects: {}
