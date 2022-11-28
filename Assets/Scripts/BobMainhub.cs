@@ -67,7 +67,7 @@ public class BobMainhub : MonoBehaviour
 
     public void LoadWeightGame()
     {
-        SceneManager.LoadScene("StrengthScene");
+        SceneManager.LoadScene("StrengthIntroScene");
     }
 
     public void LoadClimbGame()
