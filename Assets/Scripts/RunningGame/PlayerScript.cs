@@ -28,24 +28,17 @@ public class PlayerScript : MonoBehaviour
 
     private void Awake()
     {
+        isAlive = true;
         RB = GetComponent<Rigidbody2D>();
         score = 0;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     private void FixedUpdate()
     {
-        Debug.Log(RB.velocity.x);
-
         if (isAlive)
         {
             score += Time.deltaTime * 4;
-            //Debug.Log("Running Score: " + score);
+            Debug.Log("Running Score: " + score);
             ScoreTxt.text = "Speed Score: " + Bob.score.ToString("F");
             PlayerPrefs.SetFloat("score", Bob.score);
             RB.AddForce(-transform.right * backSpeed);
@@ -63,7 +56,6 @@ public class PlayerScript : MonoBehaviour
 
         if(mashKey)
         {
-            Debug.Log("within Mashkey");
             RB.AddForce(transform.right * speed);
             mashKey = false;
         }
@@ -96,9 +88,15 @@ public class PlayerScript : MonoBehaviour
         if (collision.gameObject.CompareTag("spike"))
         {
             isAlive = false;
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
             gameOver();
         }
+    }
+
+    private void OnBecameInvisible()
+    {
+        isAlive = false;
+        gameOver();
     }
 
     public void gameOver()
