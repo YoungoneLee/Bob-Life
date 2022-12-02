@@ -6,7 +6,7 @@ public class DoodleManager : MonoBehaviour
 {
     public GameObject platformPrefab;
     public Camera cam;
-
+    public float buff = 1f;
     public int platformCount = 300;
     // Start is called before the first frame update
     void Start()
@@ -18,7 +18,7 @@ public class DoodleManager : MonoBehaviour
         Vector3 spawnPosition = new Vector3();
 
         for (int i = 0; i < platformCount; i++) {
-            spawnPosition.y += Random.Range(.5f, 1.5f);
+            spawnPosition.y += Random.Range(.5f, 1.0f) + buff;
             spawnPosition.x = Random.Range(-width, width);
             Instantiate(platformPrefab, spawnPosition, Quaternion.identity);
         }
