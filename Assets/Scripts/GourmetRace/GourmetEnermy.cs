@@ -15,8 +15,14 @@ public class GourmetEnermy : MonoBehaviour
     Rigidbody2D RB;
 
     //for the time
+    float bestTime;
     float enemyTime;
     public Text enemyTimeTxt;
+
+    // Progress Bar
+    float xPos;
+    float startPos = -4.5f;
+    float finishPos = 135.5f;
 
     //for hitting the blocks
     public int hit;
@@ -24,11 +30,14 @@ public class GourmetEnermy : MonoBehaviour
     public int bobHits;
     GameObject bob;
     GameObject brutus;
+    GameObject finishLine;
+    public Slider brutusProgress;
     public GameObject blocks;
 
     private void Awake()
     {
         enemyTime = 0;
+        bestTime = PlayerPrefs.GetFloat("bestTime");
     }
 
     // Start is called before the first frame update
@@ -39,6 +48,8 @@ public class GourmetEnermy : MonoBehaviour
         bob = GameObject.FindGameObjectWithTag("bob");
         blocks = GameObject.FindGameObjectWithTag("blocks");
         Physics2D.IgnoreCollision(bob.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        finishLine = GameObject.FindGameObjectWithTag("gFinishLine");
+        finishPos = finishLine.transform.position.x;
 
         enemyHits = hit - enemyStrength;
     }
@@ -46,7 +57,10 @@ public class GourmetEnermy : MonoBehaviour
     private void FixedUpdate()
     {
         enemyTime += Time.deltaTime;
-        enemyTimeTxt.text = "Brutus Speed Score: " + enemyTime.ToString("F");
+        enemyTimeTxt.text = "High Score: " + bestTime.ToString("F");
+
+        xPos = this.transform.position.x;
+        brutusProgress.value = xPos - startPos;
 
         if (isGrounded && !jumpTriggered)
         {
@@ -70,10 +84,13 @@ public class GourmetEnermy : MonoBehaviour
         Physics2D.IgnoreCollision(RB.GetComponent<Collider2D>(), GetComponent<Collider2D>());
     }
 
-    //public void gameOver()
-    //{
-    //    SceneManager.LoadScene("RunningGameOver");
-    //}
+    public void gameOver()
+    {
+        Debug.Log("Brutus Wins!");
+        Debug.Log(enemyTime);
+        PlayerPrefs.SetFloat("bestTime", enemyTime);
+        SceneManager.LoadScene("GourmetLose");
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -96,10 +113,10 @@ public class GourmetEnermy : MonoBehaviour
             enemyHits -= 1;
         }
 
-        //if (collision.gameObject.CompareTag("gFinishLine"))
-        //{
-        //    gameOver();
-        //}
+        if (collision.gameObject.CompareTag("gFinishLine"))
+        {
+            gameOver();
+        }
     }
 
 }

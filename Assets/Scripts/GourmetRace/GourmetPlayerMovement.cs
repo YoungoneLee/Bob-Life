@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class GourmetPlayerMovement : MonoBehaviour
 {
-
-    public int statsSpeed = 10;
-    public int jumpForce = 500;
-    public int statsStength = 10;
+    // Need to test minimum stats needed to beat Brutus
+    private int statsSpeed = 20;
+    private int jumpForce = 500;
+    private int statsStrength = 10;
 
     bool jumpTriggered = false;
     bool isGrounded = false;
@@ -20,18 +20,27 @@ public class GourmetPlayerMovement : MonoBehaviour
     float time;
     public Text timeTxt;
 
+    // Progress Bar
+    float xPos;
+    float startPos = -7.5f;
+    float finishPos = 135.5f;
+
     //for hitting the blocks
     public int hit;
     public int brutusHits;
     public int bobHits;
     GameObject bob;
     GameObject brutus;
+    GameObject finishLine;
+    public Slider bobProgress;
     public GameObject blocks;
-
 
     private void Awake()
     {
         time = 0;
+        //statsSpeed = PlayerPrefs.GetInt("speed");
+        //jumpForce = PlayerPrefs.GetInt("jump") * 5;
+        //statsStrength = PlayerPrefs.GetInt("strength");
     }
 
     // Start is called before the first frame update
@@ -43,10 +52,12 @@ public class GourmetPlayerMovement : MonoBehaviour
         brutus = GameObject.FindGameObjectWithTag("brutus");
         blocks = GameObject.FindGameObjectWithTag("bs1");
         Physics2D.IgnoreCollision(bob.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        finishLine = GameObject.FindGameObjectWithTag("gFinishLine");
+        finishPos = finishLine.transform.position.x;
 
         Debug.Log("hits:" + hit);
-        //brutusHits = hit - statsStength;
-        bobHits = hit - statsStength;
+        //brutusHits = hit - statsStrength;
+        bobHits = hit - statsStrength;
         Debug.Log("bobHits" + bobHits);
     }
 
@@ -54,6 +65,9 @@ public class GourmetPlayerMovement : MonoBehaviour
     {
         time += Time.deltaTime;
         timeTxt.text = "Speed Score: " + time.ToString("F");
+
+        xPos = bob.transform.position.x;
+        bobProgress.value = xPos - startPos;
 
         if (isGrounded && !jumpTriggered) {
             RB.AddForce(transform.right * statsSpeed);
@@ -69,21 +83,23 @@ public class GourmetPlayerMovement : MonoBehaviour
 
         if (bobHits == 0) Destroy(blocks);
     }
+
     // Update is called once per frame
     void Update()
     {
         Physics2D.IgnoreCollision(RB.GetComponent<Collider2D>(), GetComponent<Collider2D>());
     }
 
-    public void gameOver()
+    public void winGame()
     {
-        SceneManager.LoadScene("RunningGameOver");
+        PlayerPrefs.SetFloat("bestTime", time);
+        SceneManager.LoadScene("EndScene");
     }
 
     IEnumerator WaitFunction()
     {
         yield return new WaitForSeconds(3);
-        gameOver();
+        winGame();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
