@@ -17,6 +17,8 @@ public class DoodleBobMovement : MonoBehaviour
     public bool isDead;
     // float height;
     // float width;
+    private int jump;
+    private int increase;
     
 
     // public Text Score;
@@ -41,6 +43,11 @@ public class DoodleBobMovement : MonoBehaviour
     void Update()
     {
         moveX = Input.GetAxis("Horizontal") * speed;
+        if(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) {
+            gameObject.transform.localScale = new Vector3(-0.6689f, 0.6768f, 1);
+        } else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) {
+            gameObject.transform.localScale = new Vector3(0.6689f, 0.6768f, 1);
+        }
         // sizeY = cam.orthographicSize * 2f;
         // ratio = (float)Screen.width/(float)Screen.height;
         // sizeX = sizeY * ratio;
@@ -73,6 +80,18 @@ public class DoodleBobMovement : MonoBehaviour
         //     transform.position = new Vector2(width, transform.position.y);
         if (isDead == true) {
             SceneManager.LoadScene("DoodleEndScene");
+            score = PlayerPrefs.GetFloat("score");
+            increase = (int) score/1000;
+            jump = PlayerPrefs.GetInt("jump", jump);
+            if(jump > 0) {
+                jump += increase;
+                PlayerPrefs.SetInt("jump", jump);
+            } else {
+                jump += 1;
+                PlayerPrefs.SetInt("jump", jump);
+            }
+
+
         }
 
     }
