@@ -9,7 +9,7 @@ public class PlayerScript : MonoBehaviour
 {
     private float JumpForce = 500;
     private float backSpeed = 15;
-    float score;
+    public float score;
 
     [SerializeField]
     bool isGrounded = false;
@@ -38,7 +38,7 @@ public class PlayerScript : MonoBehaviour
         if (isAlive)
         {
             score += Time.deltaTime * 4;
-            Debug.Log("Running Score: " + score);
+            //Debug.Log("Running Score: " + score);
             ScoreTxt.text = "Speed Score: " + Bob.score.ToString("F");
             PlayerPrefs.SetFloat("score", Bob.score);
             RB.AddForce(-transform.right * backSpeed);
@@ -102,5 +102,7 @@ public class PlayerScript : MonoBehaviour
     public void gameOver()
     {
         SceneManager.LoadScene("RunningGameOver");
+        //GameObject.Find("Player").GetComponent<PlayerScript>().properInvoke();
+
     }
 }
