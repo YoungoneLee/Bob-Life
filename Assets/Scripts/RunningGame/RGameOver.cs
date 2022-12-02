@@ -8,10 +8,18 @@ public class RGameOver : MonoBehaviour
     public float score;
     public Text ScoreTxt;
 
+    private void Start()
+    {
+        if (ScoreTxt == null)
+        {
+            ScoreTxt = GameObject.Find("Score").GetComponent<Text>();
+        }
+        ScoreTxt.text = ("Score: " + score.ToString("F"));
+    }
+
     private void Awake()
     {
         score = PlayerPrefs.GetFloat("score");
-        ScoreTxt.text = ("Score: " + score.ToString("F"));
     }
 
     public void NextScene()

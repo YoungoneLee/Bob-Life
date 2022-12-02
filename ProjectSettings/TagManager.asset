@@ -18,6 +18,8 @@ TagManager:
   - player
   - leftSide
   - rightSide
+  - bobProgress
+  - DoodlePlatform
   layers:
   - Default
   - TransparentFX
