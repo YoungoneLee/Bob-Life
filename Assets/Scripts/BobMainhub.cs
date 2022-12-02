@@ -30,9 +30,9 @@ public class BobMainhub : MonoBehaviour
         spdBar.GetComponent<Slider>().value = PlayerPrefs.GetInt("speed");
         strBar.GetComponent<Slider>().value = PlayerPrefs.GetInt("strength");
         jmpBar.GetComponent<Slider>().value = PlayerPrefs.GetInt("jump");
-        Debug.Log(PlayerPrefs.GetInt("speed"));
-        Debug.Log(PlayerPrefs.GetInt("strength"));
-        Debug.Log(PlayerPrefs.GetInt("jump"));
+        //Debug.Log(PlayerPrefs.GetInt("speed"));
+        //Debug.Log(PlayerPrefs.GetInt("strength"));
+        //Debug.Log(PlayerPrefs.GetInt("jump"));
     }
 
     // Update is called once per frame
@@ -86,7 +86,7 @@ public class BobMainhub : MonoBehaviour
         int strength = PlayerPrefs.GetInt("strength");
         strength += increase;
         strBar.GetComponent<Slider>().value = strength;
-        PlayerPrefs.SetInt("speed", strength);
+        PlayerPrefs.SetInt("strength", strength);
     }
 
     public void changeJump(int increase)
