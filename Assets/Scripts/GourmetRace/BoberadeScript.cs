@@ -18,12 +18,8 @@ public class BoberadeScript : MonoBehaviour
         
     }
 
-    void OnTriggerEnter2D(Collider2D collider)
+    public string getFlavor()
     {
-        if (collider.gameObject.CompareTag("bob"))
-        {
-            Debug.Log("Drink Boberade!");
-            //collider.getComponent<GourmetPlayerMovement>().drinkBoberade(flavor);
-        }
+        return flavor;
     }
 }

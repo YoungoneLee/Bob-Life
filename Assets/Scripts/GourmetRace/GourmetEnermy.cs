@@ -75,6 +75,27 @@ public class GourmetEnermy : MonoBehaviour
         Physics2D.IgnoreCollision(RB.GetComponent<Collider2D>(), GetComponent<Collider2D>());
     }
 
+    public void drinkBoberade(GameObject boberade)
+    {
+        string flavor = boberade.GetComponent<BoberadeScript>().flavor;
+        if (flavor == "J")
+        {
+            // Boost Jump Stat
+            enemyJump += 200;
+        }
+        else if (flavor == "Sp")
+        {
+            // Boost Speed Stat
+            enemySpeed += 5;
+        }
+        else if (flavor == "St")
+        {
+            // Boost Strength Stat;
+            enemyStrength += 5;
+        }
+        Destroy(boberade);
+    }
+
     public void gameOver()
     {
         Debug.Log("Brutus Wins!");
@@ -119,6 +140,15 @@ public class GourmetEnermy : MonoBehaviour
         else if (collision.gameObject.CompareTag("gFinishLine"))
         {
             gameOver();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "boberade")
+        {
+            Debug.Log("Brutus got Boberade!");
+            drinkBoberade(collider.gameObject);
         }
     }
 

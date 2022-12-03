@@ -9,7 +9,6 @@ using TMPro;
 
 public class GourmetPlayerMovement : MonoBehaviour
 {
-    // Need to test minimum stats needed to beat Brutus
     private int statsSpeed = 15;
     private int jumpForce = 400;
     private int statsStrength = 10;
@@ -33,12 +32,13 @@ public class GourmetPlayerMovement : MonoBehaviour
     GameObject finishLine;
     public Slider bobProgress;
     public TextMeshProUGUI powerUpText;
+    public Image powerUpBG;
 
     private void Awake()
     {
         time = 0;
         statsSpeed = PlayerPrefs.GetInt("speed");
-        jumpForce = PlayerPrefs.GetInt("jump") * 20;
+        jumpForce = PlayerPrefs.GetInt("jump") * 25;
         statsStrength = PlayerPrefs.GetInt("strength");
         Debug.Log("Speed");
         Debug.Log(statsSpeed);
@@ -58,6 +58,7 @@ public class GourmetPlayerMovement : MonoBehaviour
         finishLine = GameObject.FindGameObjectWithTag("gFinishLine");
         finishPos = finishLine.transform.position.x;
         powerUpText.text = "";
+        powerUpBG.enabled = false;
     }
 
     private void FixedUpdate()
@@ -109,6 +110,7 @@ public class GourmetPlayerMovement : MonoBehaviour
             statsStrength += 5;
             powerUpDisplay("Strength");
         }
+        Destroy(boberade);
     }
 
     public void winGame()
@@ -119,7 +121,8 @@ public class GourmetPlayerMovement : MonoBehaviour
 
     public void powerUpDisplay(string stat)
     {
-        powerUpText.text = "Temporary " + stat + " Boost!";
+        powerUpBG.enabled = true;
+        powerUpText.text = "Temp. " + stat + " Boost!";
     }
 
     IEnumerator WaitFunction()
@@ -175,8 +178,7 @@ public class GourmetPlayerMovement : MonoBehaviour
         if (collider.gameObject.tag == "boberade")
         {
             Debug.Log("Drink Boberade!");
-            string flavor = collider.gameObject.GetComponent<BoberadeScript>().flavor;
-            //drinkBoberade(flavor);
+            drinkBoberade(collider.gameObject);
         }
     }
 }
