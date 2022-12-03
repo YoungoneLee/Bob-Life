@@ -1,13 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using System.Collections;
 
 public class GourmetEnermy : MonoBehaviour
 {
-    public int enemySpeed = 10;
-    public int enemyJump = 500;
-    public int enemyStrength = 10;
+    private int enemySpeed = 10;
+    private int enemyJump = 500;
+    private int enemyStrength = 10;
 
     bool jumpTriggered = false;
     bool isGrounded = false;
@@ -24,10 +24,6 @@ public class GourmetEnermy : MonoBehaviour
     float startPos = -4.5f;
     float finishPos = 135.5f;
 
-    //for hitting the blocks
-    public int hit;
-    public int enemyHits;
-    public int bobHits;
     GameObject bob;
     GameObject brutus;
     GameObject finishLine;
@@ -43,15 +39,12 @@ public class GourmetEnermy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        hit = 13;
         RB = GetComponent<Rigidbody2D>();
         bob = GameObject.FindGameObjectWithTag("bob");
         blocks = GameObject.FindGameObjectWithTag("blocks");
         Physics2D.IgnoreCollision(bob.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         finishLine = GameObject.FindGameObjectWithTag("gFinishLine");
         finishPos = finishLine.transform.position.x;
-
-        enemyHits = hit - enemyStrength;
     }
 
     private void FixedUpdate()
@@ -74,14 +67,33 @@ public class GourmetEnermy : MonoBehaviour
             Debug.Log("jumped");
             jumpTriggered = false;
         }
-
-        if (enemyHits == 0) Destroy(blocks);
     }
 
     // Update is called once per frame
     void Update()
     {
         Physics2D.IgnoreCollision(RB.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+    }
+
+    public void drinkBoberade(GameObject boberade)
+    {
+        string flavor = boberade.GetComponent<BoberadeScript>().flavor;
+        if (flavor == "J")
+        {
+            // Boost Jump Stat
+            enemyJump += 200;
+        }
+        else if (flavor == "Sp")
+        {
+            // Boost Speed Stat
+            enemySpeed += 5;
+        }
+        else if (flavor == "St")
+        {
+            // Boost Strength Stat;
+            enemyStrength += 5;
+        }
+        Destroy(boberade);
     }
 
     public void gameOver()
@@ -92,30 +104,51 @@ public class GourmetEnermy : MonoBehaviour
         SceneManager.LoadScene("GourmetLose");
     }
 
+    IEnumerator PunchBlock(GameObject block)
+    {
+        while (block.GetComponent<BlockScript>().health > 0 && block != null)
+        {
+            // Play Punching Animation here
+            Debug.Log("Punching Block");
+            block.GetComponent<BlockScript>().getHit(enemyStrength);
+
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        Debug.Log("Block Destroyed!");
+        Destroy(block);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("jumpTag"))
         {
             jumpTriggered = true;
         }
-
-        if (collision.gameObject.CompareTag("ground"))
+        else if (collision.gameObject.CompareTag("ground"))
         {
-            Debug.Log("on the ground");
+            //Debug.Log("on the ground");
             if (isGrounded == false)
             {
                 isGrounded = true;
             }
         }
-
-        if (collision.gameObject.CompareTag("blocks"))
+        else if (collision.gameObject.CompareTag("blocks"))
         {
-            enemyHits -= 1;
+            StartCoroutine(PunchBlock(collision.gameObject));
         }
-
-        if (collision.gameObject.CompareTag("gFinishLine"))
+        else if (collision.gameObject.CompareTag("gFinishLine"))
         {
             gameOver();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "boberade")
+        {
+            Debug.Log("Brutus got Boberade!");
+            drinkBoberade(collider.gameObject);
         }
     }
 
