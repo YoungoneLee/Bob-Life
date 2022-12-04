@@ -12,10 +12,10 @@ public class PlayerScript : MonoBehaviour
     float score;
 
     [SerializeField]
-    bool isGrounded = false;
+    public bool isGrounded = false;
     bool isAlive = true;
-    bool spacePressed = false;
-    bool mashKey = false;
+    public bool spacePressed = false;
+    public bool mashKey = false;
 
     Rigidbody2D RB;
 
