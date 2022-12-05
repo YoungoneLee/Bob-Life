@@ -67,3 +67,9 @@ TagManager:
   - name: Player
     uniqueID: 2000155325
     locked: 0
+  - name: Midground
+    uniqueID: 2130279553
+    locked: 0
+  - name: Foreground
+    uniqueID: 855193423
+    locked: 0
