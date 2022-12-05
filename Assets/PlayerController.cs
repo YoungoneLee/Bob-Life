@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
+    Animator anim;
     Rigidbody2D rb2d;
     public int runSpeed;
     public int jumpForce;
@@ -18,21 +18,26 @@ public class PlayerController : MonoBehaviour
     bool keyAlternate = false;
     private int speed = 100;
 
-
     // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
     {
-        //auto move
-        //transform.position = Vector3.right * runSpeed * Time.deltaTime + transform.position;
+        if(rb2d.velocity.y < 0)
+        {
+            anim.SetBool("falling", true);
+            anim.SetBool("jumping", false);
+        }
 
         if (spacePressed)
         {
-            Debug.Log("jumpin");
+            anim.SetBool("jumping", true);
+            anim.SetBool("grounded", false);
+            anim.SetBool("running", false);
             rb2d.AddForce(Vector2.up * jumpForce);
             jumpCount += 1;
             spacePressed = false;
@@ -40,6 +45,7 @@ public class PlayerController : MonoBehaviour
 
         if (mashKey)
         {
+            anim.SetBool("running", true);
             rb2d.AddForce(transform.right * speed);
             mashKey = false;
         }
@@ -50,6 +56,8 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("ground"))
         {
+            anim.SetBool("grounded", true);
+            anim.SetBool("falling", false);
             jumpCount = 0;
             canJump = true;
         }
