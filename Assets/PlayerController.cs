@@ -6,12 +6,12 @@ public class PlayerController : MonoBehaviour
 {
     Animator anim;
     Rigidbody2D rb2d;
-    public int runSpeed;
+    public float runSpeed;
     public int jumpForce;
     private int jumpCount = 0;
     private bool spacePressed = false;
     private bool canJump = true;
-
+    public bool isGameOver = false; 
 
     //alt stuff
     bool mashKey = false;
@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        StartCoroutine("IncreaseGameSpeed");
     }
 
     private void FixedUpdate()
@@ -33,7 +34,7 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("jumping", false);
         }
 
-        if (spacePressed)
+        if (spacePressed && !isGameOver)
         {
             anim.SetBool("jumping", true);
             anim.SetBool("grounded", false);
@@ -62,6 +63,10 @@ public class PlayerController : MonoBehaviour
             canJump = true;
         }
 
+        if (collision.gameObject.CompareTag("BottomDetector") || collision.gameObject.CompareTag("Obstacle"))
+        {
+            GameOver();
+        }
     }
 
     // Update is called once per frame
@@ -78,5 +83,31 @@ public class PlayerController : MonoBehaviour
             mashKey = true;
         }
 
+    }
+
+    public void GameOver()
+    {
+        Debug.Log("gameover sonny");
+        isGameOver = true;
+        StopCoroutine("IncreaseGameSpeed");
+        //anim.SetBool
+    }
+
+    IEnumerator IncreaseGameSpeed()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(10);
+            if(runSpeed < 8)
+            {
+                runSpeed += 0.2f;
+            }
+            if (GameObject.Find("GroundSpawner").GetComponent<ObstacleSpawner>().obstacleSpawnInterval > 1)
+            {
+                GameObject.Find("GroundSpawner").GetComponent<ObstacleSpawner>().obstacleSpawnInterval -= 0.1f;
+            }
+        }
+
+        
     }
 }
