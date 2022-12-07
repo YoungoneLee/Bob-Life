@@ -5,12 +5,15 @@ using UnityEngine;
 public class RunGameAnimations : MonoBehaviour
 {
     Animator anim;
+    Rigidbody2D rb;
     bool jump;
+    bool fall;
     bool onGround;
     bool run;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
 
@@ -19,6 +22,11 @@ public class RunGameAnimations : MonoBehaviour
         jump = GetComponent<PlayerScript>().spacePressed;
         onGround = GetComponent<PlayerScript>().isGrounded;
         run = GetComponent<PlayerScript>().mashKey;
+
+        if(rb.velocity.y < 0)
+        {
+            fall = true;
+        }
     }
 
     private void FixedUpdate()
@@ -36,6 +44,12 @@ public class RunGameAnimations : MonoBehaviour
                 anim.SetBool("jumping", true);
                 anim.SetBool("grounded", false);
             }
+        }
+
+        if (fall)
+        {
+            anim.SetBool("falling", true);
+            anim.SetBool("jumping", false);
         }
 
         if (run)
