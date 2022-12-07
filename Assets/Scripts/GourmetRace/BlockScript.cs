@@ -14,6 +14,6 @@ public class BlockScript : MonoBehaviour
     public void getHit(int damage)
     {
         health -= damage;
-        Debug.Log(health);
+        //Debug.Log(health);
     }
 }

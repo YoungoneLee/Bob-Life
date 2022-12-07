@@ -27,8 +27,11 @@ public class GourmetPlayerMovement : MonoBehaviour
     float startPos = -7.5f;
     float finishPos = 135.5f;
 
-    GameObject bob;
-    GameObject brutus;
+    Animator anim;
+
+    public GameObject bob;
+    public GameObject brutus;
+    public GameObject punchingGlove;
     GameObject finishLine;
     public Slider bobProgress;
     public TextMeshProUGUI powerUpText;
@@ -52,13 +55,16 @@ public class GourmetPlayerMovement : MonoBehaviour
     void Start()
     {
         RB = GetComponent<Rigidbody2D>();
-        bob = GameObject.FindGameObjectWithTag("bob");
-        brutus = GameObject.FindGameObjectWithTag("brutus");
-        Physics2D.IgnoreCollision(bob.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        //bob = GameObject.FindGameObjectWithTag("bob");
+        //brutus = GameObject.FindGameObjectWithTag("brutus");
+        //Physics2D.IgnoreCollision(bob.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         finishLine = GameObject.FindGameObjectWithTag("gFinishLine");
         finishPos = finishLine.transform.position.x;
         powerUpText.text = "";
         powerUpBG.enabled = false;
+        punchingGlove.SetActive(false);
+
+        anim = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -72,6 +78,7 @@ public class GourmetPlayerMovement : MonoBehaviour
         if (isGrounded && !jumpTriggered && RB.velocity.x < statsSpeed) {
             RB.AddForce(transform.right * statsSpeed);
             //Debug.Log(RB.velocity);
+            anim.SetBool("running", true);
         }
 
         if (jumpTriggered)
@@ -80,13 +87,22 @@ public class GourmetPlayerMovement : MonoBehaviour
             RB.AddForce(transform.up * jumpForce);
             Debug.Log("jumped");
             jumpTriggered = false;
+            anim.SetBool("grounded", false);
+            anim.SetBool("jumping", true);
+        }
+
+        // Fall Animation
+        if (anim.GetBool("jumping") && RB.velocity.y < 0)
+        {
+            anim.SetBool("falling", true);
+            anim.SetBool("jumping", false);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        Physics2D.IgnoreCollision(RB.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        //Physics2D.IgnoreCollision(RB.GetComponent<Collider2D>(), GetComponent<Collider2D>());
     }
 
     public void drinkBoberade(GameObject boberade)
@@ -133,14 +149,17 @@ public class GourmetPlayerMovement : MonoBehaviour
 
     IEnumerator PunchBlock(GameObject block)
     {
-        while (block.GetComponent<BlockScript>().health > 0 && block != null)
+        while (block != null && block.GetComponent<BlockScript>().health > 0)
         {
             // Play Punching Animation here
             Debug.Log("Punching Block");
             block.GetComponent<BlockScript>().getHit(statsStrength);
 
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.5f);
         }
+        anim.SetBool("punching", false);
+        anim.SetBool("running", true);
+        punchingGlove.SetActive(false);
 
         Debug.Log("Block Destroyed!");
         Destroy(block);
@@ -148,11 +167,13 @@ public class GourmetPlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Collision!");
-        Debug.Log(collision.gameObject.tag);
+        //Debug.Log("Collision!");
+        //Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.CompareTag("jumpTag"))
         {
             jumpTriggered = true;
+            anim.SetBool("falling", false);
+            anim.SetBool("jumping", true);
         }
         else if (collision.gameObject.CompareTag("ground"))
         {
@@ -161,11 +182,19 @@ public class GourmetPlayerMovement : MonoBehaviour
             {
                 isGrounded = true;
             }
+            anim.SetBool("grounded", true);
+            anim.SetBool("jumping", false);
+            anim.SetBool("falling", false);
         }
         else if (collision.gameObject.CompareTag("blocks"))
         {
             StartCoroutine(PunchBlock(collision.gameObject));
-            
+            anim.SetBool("running", false);
+            anim.SetBool("punching", true);
+            punchingGlove.SetActive(true);
+            Debug.Log(bob.transform.position);
+            Debug.Log(punchingGlove.transform.position);
+
         }
         else if (collision.gameObject.CompareTag("gFinishLine"))
         {

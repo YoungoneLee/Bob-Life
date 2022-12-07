@@ -14,35 +14,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DoodleOpenScene.unity
     guid: dd482bf7ba0bf4928a1b193d472473c4
-  m_Scenes: []
-  - enabled: 1
-    path: Assets/Scenes/FinalSceneOver.unity
-    guid: 300cf682aaaeb4167a09fbb5bde6b669
-  - enabled: 1
-    path: Assets/Scenes/RunningOpeningScene.unity
-    guid: 368798605caf14277bd13bae6268938f
-  - enabled: 1
-    path: Assets/Scenes/GourmetRaceScene.unity
-    guid: 306f9cecc13c84b8ebb08390917bd9ef
   - enabled: 1
     path: Assets/Scenes/HubScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/JumpingScene.unity
-    guid: 17216578f520f4d62acec3ebc665acdf
+    path: Assets/Scenes/GourmetRaceScene.unity
+    guid: 306f9cecc13c84b8ebb08390917bd9ef
+  - enabled: 1
+    path: Assets/Scenes/GourmetLose.unity
+    guid: 707c4375331cba4439bad7496b52b109
   - enabled: 1
     path: Assets/Scenes/MainMenuScene.unity
     guid: faf32b66078b447639ab7c9e9f08b50d
-  - enabled: 1
-    path: Assets/Scenes/RunningGameOver.unity
-    guid: 637f62a61ae9f474a8da7ffdd02a8312
-  - enabled: 1
-    path: Assets/Scenes/RunningScene.unity
-    guid: f3896c55dede540578a6516993a70513
-  - enabled: 1
-    path: Assets/Scenes/StrengthIntroScene.unity
-    guid: 38ae322236a6f6349a2b4685c188ef49
-  - enabled: 1
-    path: Assets/Scenes/StrengthScene.unity
-    guid: c1fe04f304b468143b030ac2b3a6660e
   m_configObjects: {}
