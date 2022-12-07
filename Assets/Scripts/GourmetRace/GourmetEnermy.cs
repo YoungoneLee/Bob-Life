@@ -24,7 +24,7 @@ public class GourmetEnermy : MonoBehaviour
     float startPos = -4.5f;
     float finishPos = 135.5f;
 
-    GameObject bob;
+    public GameObject bob;
     GameObject brutus;
     GameObject finishLine;
     public Slider brutusProgress;
@@ -40,9 +40,9 @@ public class GourmetEnermy : MonoBehaviour
     void Start()
     {
         RB = GetComponent<Rigidbody2D>();
-        bob = GameObject.FindGameObjectWithTag("bob");
-        blocks = GameObject.FindGameObjectWithTag("blocks");
-        Physics2D.IgnoreCollision(bob.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        //bob = GameObject.FindGameObjectWithTag("bob");
+        //blocks = GameObject.FindGameObjectWithTag("blocks");
+        //Physics2D.IgnoreCollision(bob.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         finishLine = GameObject.FindGameObjectWithTag("gFinishLine");
         finishPos = finishLine.transform.position.x;
     }
@@ -64,7 +64,7 @@ public class GourmetEnermy : MonoBehaviour
         {
             RB.velocity = new Vector3(0, 0, 0);
             RB.AddForce(transform.up * enemyJump);
-            Debug.Log("jumped");
+            //Debug.Log("jumped");
             jumpTriggered = false;
         }
     }
@@ -72,7 +72,7 @@ public class GourmetEnermy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Physics2D.IgnoreCollision(RB.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        //Physics2D.IgnoreCollision(RB.GetComponent<Collider2D>(), GetComponent<Collider2D>());
     }
 
     public void drinkBoberade(GameObject boberade)
@@ -106,7 +106,7 @@ public class GourmetEnermy : MonoBehaviour
 
     IEnumerator PunchBlock(GameObject block)
     {
-        while (block.GetComponent<BlockScript>().health > 0 && block != null)
+        while (block != null && block.GetComponent<BlockScript>().health > 0)
         {
             // Play Punching Animation here
             Debug.Log("Punching Block");

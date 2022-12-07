@@ -21,14 +21,15 @@ TagManager:
   - bobProgress
   - DoodlePlatform
   - boberade
+  - Obstacle
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Brutus
   - Water
   - UI
-  - 
+  - Bob
   - 
   - 
   - 
