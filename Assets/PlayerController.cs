@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,7 +12,9 @@ public class PlayerController : MonoBehaviour
     private int jumpCount = 0;
     private bool spacePressed = false;
     private bool canJump = true;
-    public bool isGameOver = false; 
+    public bool isGameOver = false;
+    public GameObject GameOverPanel, scoreText;
+    public Text FinalScoreText, HighScoreText;
 
     //alt stuff
     bool mashKey = false;
@@ -87,10 +90,9 @@ public class PlayerController : MonoBehaviour
 
     public void GameOver()
     {
-        Debug.Log("gameover sonny");
         isGameOver = true;
         StopCoroutine("IncreaseGameSpeed");
-        //anim.SetBool
+        ShowGameOverPanel();
     }
 
     IEnumerator IncreaseGameSpeed()
@@ -110,4 +112,15 @@ public class PlayerController : MonoBehaviour
 
         
     }
+
+    void ShowGameOverPanel()
+    {
+        GameOverPanel.SetActive(true);
+        scoreText.SetActive(false);
+
+        FinalScoreText.text = "Score : " + GameObject.Find("ScoreDetector").GetComponent<ScoreSystem>().score;
+        HighScoreText.text = "High Score : " + PlayerPrefs.GetInt("HighScore");
+
+    }
+
 }

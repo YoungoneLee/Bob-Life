@@ -15,16 +15,24 @@ public class ScoreSystem : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-
+        if (GameObject.FindGameObjectWithTag("player").GetComponent<PlayerController>().isGameOver)
+        {
+            if (PlayerPrefs.GetInt("HighScore") < score)
+            {
+                Debug.Log("within the fixed update, within highscore loop");
+                PlayerPrefs.SetInt("HighScore", score);
+                Debug.Log("New High Score is: " + score);
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Obstacle"))
         {
+            Debug.Log("score" + score);
             score += 1;
             scoreText.text = "Score : " + score;
         }
