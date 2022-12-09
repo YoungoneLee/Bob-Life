@@ -24,6 +24,7 @@ public class StrengthGameManager : MonoBehaviour
     public int scorePerNote = 100;
     public int scorePerGoodNote = 125;
     public int scorePerPerfectNote = 150;
+    private int strengthIncrease = 0;
 
     public int currentMultiplier;
     public int multiplierTracker;
@@ -218,27 +219,36 @@ public class StrengthGameManager : MonoBehaviour
         if((!theBS.isBrutal && currentScore >= 9000) || (theBS.isBrutal && currentScore >= 16000))
         {
             rankVal = "EPICPOG";
+            strengthIncrease = 15;
         }
         else if((!theBS.isBrutal && currentScore >= 8000) || (theBS.isBrutal && currentScore >= 14000))
         {
             rankVal = "S";
+            strengthIncrease = 13;
         }
         else if((!theBS.isBrutal && currentScore >= 6000) || (theBS.isBrutal && currentScore >= 11000))
         {
             rankVal = "A";
+            strengthIncrease = 11;
         }
         else if((!theBS.isBrutal && currentScore >= 4500) || (theBS.isBrutal && currentScore >= 8500))
         {
             rankVal = "B";
+            strengthIncrease = 9;
         }
         else if((!theBS.isBrutal && currentScore >= 3000) || (theBS.isBrutal && currentScore >= 6500))
         {
             rankVal = "C";
+            strengthIncrease = 7;
         }
         else if((!theBS.isBrutal && currentScore >= 2000) || (theBS.isBrutal && currentScore >= 5000))
         {
             rankVal = "D";
+            strengthIncrease = 5;
         }
+        int currStrength = PlayerPrefs.GetInt("strength");
+        PlayerPrefs.SetInt("strength", currStrength + strengthIncrease);
+
 
         if(reactionTime == -1f)
         {

@@ -65,7 +65,7 @@ public class DoodleBobMovement : MonoBehaviour
         if (isDead == true) {
             SceneManager.LoadScene("DoodleEndScene");
             score = PlayerPrefs.GetFloat("score");
-            increase = (int) score/1000;
+            increase = (int) score/500;
             jump = PlayerPrefs.GetInt("jump");
             if(jump > 0) {
                 jump += increase;
