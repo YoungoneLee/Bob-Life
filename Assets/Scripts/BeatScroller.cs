@@ -11,7 +11,7 @@ public class BeatScroller : MonoBehaviour
 
     public bool isBrutal = false;
 
-    public int numRandomRolls = 20;
+    public int numRandomRolls = 64;
 
     public GameObject leftNote, upNote, downNote, rightNote;
 
@@ -45,7 +45,7 @@ public class BeatScroller : MonoBehaviour
     {
         float r = 0;
 
-        for(int i = 0; i < numRandomRolls; i++)
+        for(float i = 0.2f; i < numRandomRolls; i++)
         {
             if(isBrutal)
                 r = Random.Range(1,11);

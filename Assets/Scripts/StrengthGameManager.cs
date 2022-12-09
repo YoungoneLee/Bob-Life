@@ -14,6 +14,9 @@ public class StrengthGameManager : MonoBehaviour
 
     public BeatScroller theBS;
     public StrengthButtons StrengthButton;
+    public AudioSource rhythmMusic;
+    public AudioSource brutalMusic;
+    public AudioSource missSound, hitSound, perfectSound;
     ////////////////////////////////
     // 1. Add music file to scene
     // 2. Turn off play on awake
@@ -113,8 +116,19 @@ public class StrengthGameManager : MonoBehaviour
         }
     }
 
+    public void playMusic()
+    {
+        rhythmMusic.Play();
+    }
+
+    public void playBrutalMusic()
+    {
+        brutalMusic.Play();
+    }
+
     public void NoteHit()
     {
+
         scoreText.text = "Note Score: " + currentScore;
 
         if(currentMultiplier - 1 < multiplierThresholds.Length)
@@ -133,6 +147,8 @@ public class StrengthGameManager : MonoBehaviour
 
     public void NormalHit()
     {
+        hitSound.Play();
+
         currentScore += scorePerNote * currentMultiplier;
         NoteHit();
 
@@ -141,6 +157,8 @@ public class StrengthGameManager : MonoBehaviour
 
     public void GoodHit()
     {
+        hitSound.Play();
+
         currentScore += scorePerGoodNote * currentMultiplier;
         NoteHit();
 
@@ -149,6 +167,8 @@ public class StrengthGameManager : MonoBehaviour
 
     public void PerfectHit()
     {
+        perfectSound.Play();
+
         currentScore += scorePerPerfectNote * currentMultiplier;
         NoteHit();
         
@@ -157,6 +177,8 @@ public class StrengthGameManager : MonoBehaviour
 
     public void NoteMissed()
     {
+        missSound.Play();
+
         currentMultiplier = 1;
         multiplierTracker = 0;
 
@@ -183,6 +205,8 @@ public class StrengthGameManager : MonoBehaviour
         percentHitText.text = "" + percentHit.ToString("F1") + "%";
         
         string rankVal = "F";
+
+        float scoreNoteRatio = (normalHits + goodHits * 2 + perfectHits * 3 - missedHits)/totalNotes;
         
         /*
         if(percentHit >= 99)
@@ -215,6 +239,7 @@ public class StrengthGameManager : MonoBehaviour
         //Debug.Log("currentScore = " + currentScore);
 
         //RANKINGS UPDATE
+        /*
         if((!theBS.isBrutal && currentScore >= 9000) || (theBS.isBrutal && currentScore >= 16000))
         {
             rankVal = "EPICPOG";
@@ -236,6 +261,33 @@ public class StrengthGameManager : MonoBehaviour
             rankVal = "C";
         }
         else if((!theBS.isBrutal && currentScore >= 2000) || (theBS.isBrutal && currentScore >= 5000))
+        {
+            rankVal = "D";
+        }
+        */
+
+        //RANKINGS UPDATE 2
+        if(scoreNoteRatio >= 2.5)
+        {
+            rankVal = "EPICPOG";
+        }
+        else if(scoreNoteRatio >= 2.2)
+        {
+            rankVal = "S";
+        }
+        else if(scoreNoteRatio >= 2)
+        {
+            rankVal = "A";
+        }
+        else if(scoreNoteRatio >= 1.75)
+        {
+            rankVal = "B";
+        }
+        else if(scoreNoteRatio >= 1.25)
+        {
+            rankVal = "C";
+        }
+        else if(scoreNoteRatio >= 0.6)
         {
             rankVal = "D";
         }
