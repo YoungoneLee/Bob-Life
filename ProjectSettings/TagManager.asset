@@ -20,8 +20,9 @@ TagManager:
   - rightSide
   - bobProgress
   - DoodlePlatform
-  - boberade
   - Obstacle
+  - BottomDetector
+  - boberade
   - MovingPlatform
   layers:
   - Default

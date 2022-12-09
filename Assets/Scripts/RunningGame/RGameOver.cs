@@ -29,6 +29,6 @@ public class RGameOver : MonoBehaviour
 
     public void RunningScene()
     {
-        SceneManager.LoadScene("RunningScene");
+        SceneManager.LoadScene("newRunningGame");
     }
 }
