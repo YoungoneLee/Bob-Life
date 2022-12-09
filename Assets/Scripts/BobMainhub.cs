@@ -12,6 +12,8 @@ public class BobMainhub : MonoBehaviour
     public GameObject strBar;
     public GameObject jmpBar;
     public GameObject pauseMenu;
+    public GameObject boberade;
+    public GameObject bob;
 
     //idle movement script
     Vector3 mousePos;
@@ -22,6 +24,7 @@ public class BobMainhub : MonoBehaviour
     private Rigidbody2D rb;
     private float mapEdge = 7.1f;
     private bool isPaused = false;
+    Animator anim;
 
     // Start is called before the first frame update
     void Start()
@@ -30,9 +33,12 @@ public class BobMainhub : MonoBehaviour
         spdBar.GetComponent<Slider>().value = PlayerPrefs.GetInt("speed");
         strBar.GetComponent<Slider>().value = PlayerPrefs.GetInt("strength");
         jmpBar.GetComponent<Slider>().value = PlayerPrefs.GetInt("jump");
-        Debug.Log(PlayerPrefs.GetInt("speed"));
-        Debug.Log(PlayerPrefs.GetInt("strength"));
-        Debug.Log(PlayerPrefs.GetInt("jump"));
+        //Debug.Log(PlayerPrefs.GetInt("speed"));
+        //Debug.Log(PlayerPrefs.GetInt("strength"));
+        //Debug.Log(PlayerPrefs.GetInt("jump"));
+
+        anim = bob.GetComponent<Animator>();
+        boberade.SetActive(false);
     }
 
     // Update is called once per frame
@@ -40,7 +46,7 @@ public class BobMainhub : MonoBehaviour
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition += ((Vector2)transform.position - mousePosition).normalized * minDistance;
-        float newPosition = Mathf.SmoothDamp(transform.position.x, mousePosition.x, ref currentVelocity.x, smoothTime, maxMoveSpeed);
+        float newPosition = Mathf.SmoothDamp(bob.transform.position.x, mousePosition.x, ref currentVelocity.x, smoothTime, maxMoveSpeed);
         // Temporary Solution, need to remember how to get collision working
         if (newPosition > mapEdge)
             newPosition = mapEdge;
@@ -53,11 +59,11 @@ public class BobMainhub : MonoBehaviour
 
         if (!isPaused)
         {
-            transform.position = new Vector3(newPosition, transform.position.y, transform.position.z);
-            if (mousePosition.x > transform.position.x)
-                gameObject.transform.localScale = new Vector3(1, 1, 1);
-            else if (mousePosition.x < transform.position.x)
-                gameObject.transform.localScale = new Vector3(-1, 1, 1);
+            bob.transform.position = new Vector3(newPosition, bob.transform.position.y, bob.transform.position.z);
+            if (mousePosition.x > bob.transform.position.x)
+                bob.transform.localScale = new Vector3(1, 1, 1);
+            else if (mousePosition.x < bob.transform.position.x)
+                bob.transform.localScale = new Vector3(-1, 1, 1);
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -67,7 +73,7 @@ public class BobMainhub : MonoBehaviour
                 {
                     //Debug.Log(hit.transform.name);
                     if (hit.collider.CompareTag("Player"))
-                        ClickBob(hit.collider.gameObject);
+                        ClickBob();
                 }
             }
         }
@@ -86,7 +92,7 @@ public class BobMainhub : MonoBehaviour
         int strength = PlayerPrefs.GetInt("strength");
         strength += increase;
         strBar.GetComponent<Slider>().value = strength;
-        PlayerPrefs.SetInt("speed", strength);
+        PlayerPrefs.SetInt("strength", strength);
     }
 
     public void changeJump(int increase)
@@ -97,10 +103,17 @@ public class BobMainhub : MonoBehaviour
         PlayerPrefs.SetInt("jump", jump);
     }
 
-    public void ClickBob(GameObject bob)
+    public void ClickBob()
     {
         // Should be some kind of small interaction or sound effect
         Debug.Log("Bob Clicked!");
+        boberade.SetActive(true);
+        if (anim.GetBool("Boberade"))
+        {
+            anim.SetBool("Boberade", false);
+            boberade.SetActive(false);
+        }
+        else anim.SetBool("Boberade", true);
     }
 
     public void LoadRunGame()

@@ -22,14 +22,16 @@ TagManager:
   - DoodlePlatform
   - Obstacle
   - BottomDetector
+  - boberade
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Brutus
   - Water
   - UI
-  - 
+  - Bob
   - 
   - 
   - 
