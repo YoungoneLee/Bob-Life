@@ -1,13 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using System.Collections;
 
 public class GourmetEnermy : MonoBehaviour
 {
-    public int enemySpeed = 10;
-    public int enemyJump = 500;
-    public int enemyStrength = 10;
+    private int enemySpeed = 10;
+    private int enemyJump = 500;
+    private int enemyStrength = 10;
 
     bool jumpTriggered = false;
     bool isGrounded = false;
@@ -15,38 +15,45 @@ public class GourmetEnermy : MonoBehaviour
     Rigidbody2D RB;
 
     //for the time
+    float bestTime;
     float enemyTime;
     public Text enemyTimeTxt;
 
-    //for hitting the blocks
-    public int hit;
-    public int enemyHits;
-    public int bobHits;
-    GameObject bob;
+    // Progress Bar
+    float xPos;
+    float startPos = -4.5f;
+    float finishPos = 135.5f;
+
+    public GameObject bob;
     GameObject brutus;
+    GameObject finishLine;
+    public Slider brutusProgress;
     public GameObject blocks;
 
     private void Awake()
     {
         enemyTime = 0;
+        bestTime = PlayerPrefs.GetFloat("bestTime");
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        hit = 13;
         RB = GetComponent<Rigidbody2D>();
-        bob = GameObject.FindGameObjectWithTag("bob");
-        blocks = GameObject.FindGameObjectWithTag("blocks");
-        Physics2D.IgnoreCollision(bob.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-
-        enemyHits = hit - enemyStrength;
+        //bob = GameObject.FindGameObjectWithTag("bob");
+        //blocks = GameObject.FindGameObjectWithTag("blocks");
+        //Physics2D.IgnoreCollision(bob.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        finishLine = GameObject.FindGameObjectWithTag("gFinishLine");
+        finishPos = finishLine.transform.position.x;
     }
 
     private void FixedUpdate()
     {
         enemyTime += Time.deltaTime;
-        enemyTimeTxt.text = "Brutus Speed Score: " + enemyTime.ToString("F");
+        enemyTimeTxt.text = "High Score: " + bestTime.ToString("F");
+
+        xPos = this.transform.position.x;
+        brutusProgress.value = xPos - startPos;
 
         if (isGrounded && !jumpTriggered)
         {
@@ -57,23 +64,60 @@ public class GourmetEnermy : MonoBehaviour
         {
             RB.velocity = new Vector3(0, 0, 0);
             RB.AddForce(transform.up * enemyJump);
-            Debug.Log("jumped");
+            //Debug.Log("jumped");
             jumpTriggered = false;
         }
-
-        if (enemyHits == 0) Destroy(blocks);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Physics2D.IgnoreCollision(RB.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        //Physics2D.IgnoreCollision(RB.GetComponent<Collider2D>(), GetComponent<Collider2D>());
     }
 
-    //public void gameOver()
-    //{
-    //    SceneManager.LoadScene("RunningGameOver");
-    //}
+    public void drinkBoberade(GameObject boberade)
+    {
+        string flavor = boberade.GetComponent<BoberadeScript>().flavor;
+        if (flavor == "J")
+        {
+            // Boost Jump Stat
+            enemyJump += 200;
+        }
+        else if (flavor == "Sp")
+        {
+            // Boost Speed Stat
+            enemySpeed += 5;
+        }
+        else if (flavor == "St")
+        {
+            // Boost Strength Stat;
+            enemyStrength += 5;
+        }
+        Destroy(boberade);
+    }
+
+    public void gameOver()
+    {
+        Debug.Log("Brutus Wins!");
+        Debug.Log(enemyTime);
+        PlayerPrefs.SetFloat("bestTime", enemyTime);
+        SceneManager.LoadScene("GourmetLose");
+    }
+
+    IEnumerator PunchBlock(GameObject block)
+    {
+        while (block != null && block.GetComponent<BlockScript>().health > 0)
+        {
+            // Play Punching Animation here
+            Debug.Log("Punching Block");
+            block.GetComponent<BlockScript>().getHit(enemyStrength);
+
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        Debug.Log("Block Destroyed!");
+        Destroy(block);
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -81,25 +125,31 @@ public class GourmetEnermy : MonoBehaviour
         {
             jumpTriggered = true;
         }
-
-        if (collision.gameObject.CompareTag("ground"))
+        else if (collision.gameObject.CompareTag("ground"))
         {
-            Debug.Log("on the ground");
+            //Debug.Log("on the ground");
             if (isGrounded == false)
             {
                 isGrounded = true;
             }
         }
-
-        if (collision.gameObject.CompareTag("blocks"))
+        else if (collision.gameObject.CompareTag("blocks"))
         {
-            enemyHits -= 1;
+            StartCoroutine(PunchBlock(collision.gameObject));
         }
+        else if (collision.gameObject.CompareTag("gFinishLine"))
+        {
+            gameOver();
+        }
+    }
 
-        //if (collision.gameObject.CompareTag("gFinishLine"))
-        //{
-        //    gameOver();
-        //}
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "boberade")
+        {
+            Debug.Log("Brutus got Boberade!");
+            drinkBoberade(collider.gameObject);
+        }
     }
 
 }

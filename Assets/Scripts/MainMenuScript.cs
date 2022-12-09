@@ -5,24 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void NewGame()
     {
         // Should also show Story Introduction here
         PlayerPrefs.SetInt("speed", 1);
         PlayerPrefs.SetInt("strength", 1);
         PlayerPrefs.SetInt("jump", 1);
+        PlayerPrefs.SetFloat("bestTime", 20);
         SceneManager.LoadScene("HubScene");
     }
 
