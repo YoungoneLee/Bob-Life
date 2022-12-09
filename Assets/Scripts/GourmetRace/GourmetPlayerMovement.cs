@@ -59,7 +59,8 @@ public class GourmetPlayerMovement : MonoBehaviour
         //brutus = GameObject.FindGameObjectWithTag("brutus");
         //Physics2D.IgnoreCollision(bob.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         finishLine = GameObject.FindGameObjectWithTag("gFinishLine");
-        finishPos = finishLine.transform.position.x;
+        //finishPos = finishLine.transform.position.x;
+        finishPos = 139.77f;
         powerUpText.text = "";
         powerUpBG.enabled = false;
         punchingGlove.SetActive(false);
