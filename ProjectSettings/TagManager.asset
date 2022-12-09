@@ -18,6 +18,8 @@ TagManager:
   - player
   - leftSide
   - rightSide
+  - DoodlePlatform
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
