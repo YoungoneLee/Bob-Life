@@ -55,6 +55,25 @@ public class StrengthGameManager : MonoBehaviour
     public GameObject resultsScreen;
     public Text percentHitText, normalsText, goodsText, perfectsText, missesText, reactionSpeedText, rankText, finalScoreText;
 
+    //animation stuff
+    public GameObject bob;
+    Animator bobAnim;
+
+    public GameObject dumbbell;
+    Animator dumbAnim;
+
+    public GameObject barbell;
+    Animator barAnim;
+
+    public GameObject boberade;
+    Animator boberadeAnim;
+
+    public GameObject glove;
+    Animator gloveAnim;
+
+    public GameObject bag;
+    Animator bagAnim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,6 +86,14 @@ public class StrengthGameManager : MonoBehaviour
 
         scoreText.text = "Score: 0";
         currentMultiplier = 1;
+
+        bobAnim = bob.GetComponent<Animator>();
+        dumbAnim = dumbbell.GetComponent<Animator>();
+        barAnim = barbell.GetComponent<Animator>();
+        boberadeAnim = boberade.GetComponent<Animator>();
+        gloveAnim = glove.GetComponent<Animator>();
+        bagAnim = bag.GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -113,6 +140,34 @@ public class StrengthGameManager : MonoBehaviour
                 }
 
             }
+        }
+    }
+
+    public void playNoteAnim(KeyCode key) {
+        bobAnim.SetBool("rightPressed", false);
+        bobAnim.SetBool("downPressed", false);
+        gloveAnim.SetBool("punching", false);
+        glove.gameObject.SetActive(false);
+        boberade.gameObject.SetActive(false);
+        dumbbell.gameObject.SetActive(false);
+        barbell.gameObject.SetActive(false);
+        bag.gameObject.SetActive(false);
+
+        if(key == KeyCode.RightArrow) {
+            bobAnim.SetBool("rightPressed", true);
+            glove.gameObject.SetActive(true);
+            gloveAnim.SetBool("punching", true);
+            bag.gameObject.SetActive(true);
+        }
+        if(key == KeyCode.DownArrow) {
+            bobAnim.SetBool("downPressed", true);
+            boberade.gameObject.SetActive(true);
+        }
+        if(key == KeyCode.UpArrow) {
+            barbell.gameObject.SetActive(true);
+        }
+        if(key == KeyCode.LeftArrow) {
+            dumbbell.gameObject.SetActive(true);
         }
     }
 
