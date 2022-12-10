@@ -14,6 +14,9 @@ public class StrengthGameManager : MonoBehaviour
 
     public BeatScroller theBS;
     public StrengthButtons StrengthButton;
+    public AudioSource rhythmMusic;
+    public AudioSource brutalMusic;
+    public AudioSource missSound, hitSound, perfectSound;
     ////////////////////////////////
     // 1. Add music file to scene
     // 2. Turn off play on awake
@@ -53,6 +56,25 @@ public class StrengthGameManager : MonoBehaviour
     public GameObject resultsScreen;
     public Text percentHitText, normalsText, goodsText, perfectsText, missesText, reactionSpeedText, rankText, finalScoreText;
 
+    //animation stuff
+    public GameObject bob;
+    Animator bobAnim;
+
+    public GameObject dumbbell;
+    Animator dumbAnim;
+
+    public GameObject barbell;
+    Animator barAnim;
+
+    public GameObject boberade;
+    Animator boberadeAnim;
+
+    public GameObject glove;
+    Animator gloveAnim;
+
+    public GameObject bag;
+    Animator bagAnim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -65,6 +87,14 @@ public class StrengthGameManager : MonoBehaviour
 
         scoreText.text = "Score: 0";
         currentMultiplier = 1;
+
+        bobAnim = bob.GetComponent<Animator>();
+        dumbAnim = dumbbell.GetComponent<Animator>();
+        barAnim = barbell.GetComponent<Animator>();
+        boberadeAnim = boberade.GetComponent<Animator>();
+        gloveAnim = glove.GetComponent<Animator>();
+        bagAnim = bag.GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -114,8 +144,47 @@ public class StrengthGameManager : MonoBehaviour
         }
     }
 
+    public void playNoteAnim(KeyCode key) {
+        bobAnim.SetBool("rightPressed", false);
+        bobAnim.SetBool("downPressed", false);
+        gloveAnim.SetBool("punching", false);
+        glove.gameObject.SetActive(false);
+        boberade.gameObject.SetActive(false);
+        dumbbell.gameObject.SetActive(false);
+        barbell.gameObject.SetActive(false);
+        bag.gameObject.SetActive(false);
+
+        if(key == KeyCode.RightArrow) {
+            bobAnim.SetBool("rightPressed", true);
+            glove.gameObject.SetActive(true);
+            gloveAnim.SetBool("punching", true);
+            bag.gameObject.SetActive(true);
+        }
+        if(key == KeyCode.DownArrow) {
+            bobAnim.SetBool("downPressed", true);
+            boberade.gameObject.SetActive(true);
+        }
+        if(key == KeyCode.UpArrow) {
+            barbell.gameObject.SetActive(true);
+        }
+        if(key == KeyCode.LeftArrow) {
+            dumbbell.gameObject.SetActive(true);
+        }
+    }
+
+    public void playMusic()
+    {
+        rhythmMusic.Play();
+    }
+
+    public void playBrutalMusic()
+    {
+        brutalMusic.Play();
+    }
+
     public void NoteHit()
     {
+
         scoreText.text = "Note Score: " + currentScore;
 
         if(currentMultiplier - 1 < multiplierThresholds.Length)
@@ -134,6 +203,8 @@ public class StrengthGameManager : MonoBehaviour
 
     public void NormalHit()
     {
+        hitSound.Play();
+
         currentScore += scorePerNote * currentMultiplier;
         NoteHit();
 
@@ -142,6 +213,8 @@ public class StrengthGameManager : MonoBehaviour
 
     public void GoodHit()
     {
+        hitSound.Play();
+
         currentScore += scorePerGoodNote * currentMultiplier;
         NoteHit();
 
@@ -150,6 +223,8 @@ public class StrengthGameManager : MonoBehaviour
 
     public void PerfectHit()
     {
+        perfectSound.Play();
+
         currentScore += scorePerPerfectNote * currentMultiplier;
         NoteHit();
         
@@ -158,6 +233,8 @@ public class StrengthGameManager : MonoBehaviour
 
     public void NoteMissed()
     {
+        missSound.Play();
+
         currentMultiplier = 1;
         multiplierTracker = 0;
 
@@ -184,6 +261,8 @@ public class StrengthGameManager : MonoBehaviour
         percentHitText.text = "" + percentHit.ToString("F1") + "%";
         
         string rankVal = "F";
+
+        float scoreNoteRatio = (normalHits + goodHits * 2 + perfectHits * 3 - missedHits)/totalNotes;
         
         /*
         if(percentHit >= 99)
@@ -216,6 +295,7 @@ public class StrengthGameManager : MonoBehaviour
         //Debug.Log("currentScore = " + currentScore);
 
         //RANKINGS UPDATE
+        /*
         if((!theBS.isBrutal && currentScore >= 9000) || (theBS.isBrutal && currentScore >= 16000))
         {
             rankVal = "EPICPOG";
@@ -246,9 +326,33 @@ public class StrengthGameManager : MonoBehaviour
             rankVal = "D";
             strengthIncrease = 5;
         }
-        int currStrength = PlayerPrefs.GetInt("strength");
-        PlayerPrefs.SetInt("strength", currStrength + strengthIncrease);
+        */
 
+        //RANKINGS UPDATE 2
+        if(scoreNoteRatio >= 2.5)
+        {
+            rankVal = "EPICPOG";
+        }
+        else if(scoreNoteRatio >= 2.2)
+        {
+            rankVal = "S";
+        }
+        else if(scoreNoteRatio >= 2)
+        {
+            rankVal = "A";
+        }
+        else if(scoreNoteRatio >= 1.75)
+        {
+            rankVal = "B";
+        }
+        else if(scoreNoteRatio >= 1.25)
+        {
+            rankVal = "C";
+        }
+        else if(scoreNoteRatio >= 0.6)
+        {
+            rankVal = "D";
+        }
 
         if(reactionTime == -1f)
         {

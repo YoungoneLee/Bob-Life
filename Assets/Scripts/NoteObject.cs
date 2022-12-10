@@ -32,6 +32,8 @@ public class NoteObject : MonoBehaviour
         {
             if(canBePressed)
             {
+                StrengthGameManager.instance.playNoteAnim(keyToPress);
+
                 gameObject.SetActive(false);
 
                 // Debug.Log("Ypos: " + transform.position.y);
