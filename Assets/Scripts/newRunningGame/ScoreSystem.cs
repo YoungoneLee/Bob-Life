@@ -7,12 +7,10 @@ public class ScoreSystem : MonoBehaviour
 {
     public int score = 0;
     public Text scoreText;
-    private int speed;
 
     // Start is called before the first frame update
     void Start()
     {
-        PlayerPrefs.GetInt("speed");
     }
 
     private void FixedUpdate()
@@ -25,8 +23,6 @@ public class ScoreSystem : MonoBehaviour
                 PlayerPrefs.SetInt("HighScore", score);
                 Debug.Log("New High Score is: " + score);
             }
-            speed += score;
-            PlayerPrefs.SetInt("speed", speed);
         }
     }
 

@@ -21,12 +21,17 @@ public class PlayerController : MonoBehaviour
     bool keyAlternate = false;
     private int speed = 100;
 
+    //for incrasing stats
+    private int speeds;
+    private float increase;
+
     // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         StartCoroutine("IncreaseGameSpeed");
+        PlayerPrefs.GetInt("speed");
     }
 
     private void FixedUpdate()
@@ -93,6 +98,11 @@ public class PlayerController : MonoBehaviour
         isGameOver = true;
         StopCoroutine("IncreaseGameSpeed");
         ShowGameOverPanel();
+        //increase = GameObject.Find("ScoreDetector").GetComponent<ScoreSystem>().score;
+        speeds = GameObject.Find("ScoreDetector").GetComponent<ScoreSystem>().score;
+        //speeds = (int) Mathf.Ceil((increase / 2));
+        Debug.Log("speeds score: " + speeds);
+        PlayerPrefs.SetInt("speed", speeds);
     }
 
     IEnumerator IncreaseGameSpeed()
