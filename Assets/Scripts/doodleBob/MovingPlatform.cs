@@ -13,6 +13,7 @@ public class MovingPlatform : MonoBehaviour
     public Transform[] points;
     public Text Score;
     public DoodleBobMovement Bob;
+    public AudioSource boing;
     public float jumpForce = 10f;
     private bool hasHit;
 
@@ -43,6 +44,7 @@ public class MovingPlatform : MonoBehaviour
                 Vector2 velocity = rb.velocity;
                 velocity.y = jumpForce;
                 rb.velocity = velocity;
+                boing.Play();
                 if( !hasHit) {
                     hasHit = true;
                     Bob.score += 100;

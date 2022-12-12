@@ -25,7 +25,7 @@ public class DoodleManager : MonoBehaviour
             spawnPosition.y += Random.Range(1.0f, 2.0f) + buff;
             spawnPosition.x = Random.Range(-width, width);
             spawnPositionR.x = Random.Range(-width, width);
-            spawnPositionR.y += Random.Range(2f, 5f) + buff;
+            spawnPositionR.y += Random.Range(2.5f, 5f) + buff;
             if(PlayerPrefs.GetInt("jump") < 10) {
                 Instantiate(doodlePlatform, spawnPosition, Quaternion.identity);
             } else if (PlayerPrefs.GetInt("jump") > 10 && PlayerPrefs.GetInt("jump") < 20) {
