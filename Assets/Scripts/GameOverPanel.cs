@@ -28,5 +28,9 @@ public class GameOverPanel : MonoBehaviour
         SceneManager.LoadScene("HubScene");
     }
 
+    public void JumpingScene() {
+        SceneManager.LoadScene("JumpingScene");
+    }
+
 
 }

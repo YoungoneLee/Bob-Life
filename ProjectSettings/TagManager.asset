@@ -24,6 +24,7 @@ TagManager:
   - BottomDetector
   - boberade
   - MovingPlatform
+  - DoodleMusic
   layers:
   - Default
   - TransparentFX

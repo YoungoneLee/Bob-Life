@@ -15,6 +15,7 @@ public class DoodleEndScript : MonoBehaviour
     }
     public void loadHubScene() {
         SceneManager.LoadScene("HubScene");
+        GameObject.FindGameObjectWithTag("DoodleMusic").GetComponent<DoodleMusic>().StopMusic();
         PlayerPrefs.SetFloat("score",0);
     }
 
