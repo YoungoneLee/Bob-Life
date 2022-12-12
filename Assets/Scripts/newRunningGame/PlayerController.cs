@@ -98,9 +98,8 @@ public class PlayerController : MonoBehaviour
         isGameOver = true;
         StopCoroutine("IncreaseGameSpeed");
         ShowGameOverPanel();
-        //increase = GameObject.Find("ScoreDetector").GetComponent<ScoreSystem>().score;
         speeds = GameObject.Find("ScoreDetector").GetComponent<ScoreSystem>().score;
-        //speeds = (int) Mathf.Ceil((increase / 2));
+        increase += speeds;
         Debug.Log("speeds score: " + speeds);
         PlayerPrefs.SetInt("speed", speeds);
     }
