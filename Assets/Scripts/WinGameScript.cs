@@ -17,7 +17,7 @@ public class WinGameScript : MonoBehaviour
         int spd = PlayerPrefs.GetInt("speed");
         int jmp = PlayerPrefs.GetInt("jump");
 
-        if (str + spd + jmp >= 75)
+        if (str + spd + jmp >= 60)
         {
             Debug.Log("Secret!");
             panel.SetActive(true);

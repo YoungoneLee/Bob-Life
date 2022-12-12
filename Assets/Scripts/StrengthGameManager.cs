@@ -332,27 +332,35 @@ public class StrengthGameManager : MonoBehaviour
         if(scoreNoteRatio >= 2.5)
         {
             rankVal = "EPICPOG";
+            strengthIncrease = 8;
         }
         else if(scoreNoteRatio >= 2.2)
         {
             rankVal = "S";
+            strengthIncrease = 7;
         }
         else if(scoreNoteRatio >= 2)
         {
             rankVal = "A";
+            strengthIncrease = 6;
         }
         else if(scoreNoteRatio >= 1.75)
         {
             rankVal = "B";
+            strengthIncrease = 5;
         }
         else if(scoreNoteRatio >= 1.25)
         {
             rankVal = "C";
+            strengthIncrease = 4;
         }
         else if(scoreNoteRatio >= 0.6)
         {
             rankVal = "D";
+            strengthIncrease = 3;
         }
+        int newStr = PlayerPrefs.GetInt("strength") + strengthIncrease;
+        PlayerPrefs.SetInt("strength", newStr);
 
         if(reactionTime == -1f)
         {

@@ -28,6 +28,7 @@ public class GourmetPlayerMovement : MonoBehaviour
     float finishPos = 135.5f;
 
     Animator anim;
+    Animator punchAnim;
 
     public GameObject bob;
     public GameObject brutus;
@@ -43,6 +44,10 @@ public class GourmetPlayerMovement : MonoBehaviour
         statsSpeed = PlayerPrefs.GetInt("speed");
         jumpForce = PlayerPrefs.GetInt("jump") * 25;
         statsStrength = PlayerPrefs.GetInt("strength");
+        if (statsSpeed <= 1)
+            statsSpeed = 8;
+        if (jumpForce <= 25)
+            jumpForce = 200;
         Debug.Log("Speed");
         Debug.Log(statsSpeed);
         Debug.Log("Jump");
@@ -63,6 +68,7 @@ public class GourmetPlayerMovement : MonoBehaviour
         finishPos = 139.77f;
         powerUpText.text = "";
         powerUpBG.enabled = false;
+        punchAnim = punchingGlove.GetComponent<Animator>();
         punchingGlove.SetActive(false);
 
         anim = GetComponent<Animator>();
@@ -159,6 +165,7 @@ public class GourmetPlayerMovement : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
         anim.SetBool("punching", false);
+        punchAnim.SetBool("punching", false);
         anim.SetBool("running", true);
         punchingGlove.SetActive(false);
 
@@ -192,6 +199,7 @@ public class GourmetPlayerMovement : MonoBehaviour
             StartCoroutine(PunchBlock(collision.gameObject));
             anim.SetBool("running", false);
             anim.SetBool("punching", true);
+            punchAnim.SetBool("punching", true);
             punchingGlove.SetActive(true);
             Debug.Log(bob.transform.position);
             Debug.Log(punchingGlove.transform.position);
