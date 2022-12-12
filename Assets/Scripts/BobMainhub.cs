@@ -33,9 +33,9 @@ public class BobMainhub : MonoBehaviour
         spdBar.GetComponent<Slider>().value = PlayerPrefs.GetInt("speed");
         strBar.GetComponent<Slider>().value = PlayerPrefs.GetInt("strength");
         jmpBar.GetComponent<Slider>().value = PlayerPrefs.GetInt("jump");
-        //Debug.Log(PlayerPrefs.GetInt("speed"));
-        //Debug.Log(PlayerPrefs.GetInt("strength"));
-        //Debug.Log(PlayerPrefs.GetInt("jump"));
+        Debug.Log(PlayerPrefs.GetInt("speed"));
+        Debug.Log(PlayerPrefs.GetInt("strength"));
+        Debug.Log(PlayerPrefs.GetInt("jump"));
 
         anim = bob.GetComponent<Animator>();
         boberade.SetActive(false);
@@ -44,6 +44,12 @@ public class BobMainhub : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PlayerPrefs.GetInt("speed") > 30)
+            PlayerPrefs.SetInt("speed", 30);
+        if (PlayerPrefs.GetInt("strength") > 30)
+            PlayerPrefs.SetInt("strength", 30);
+        if (PlayerPrefs.GetInt("jump") > 30)
+            PlayerPrefs.SetInt("jump", 30);
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition += ((Vector2)transform.position - mousePosition).normalized * minDistance;
         float newPosition = Mathf.SmoothDamp(bob.transform.position.x, mousePosition.x, ref currentVelocity.x, smoothTime, maxMoveSpeed);

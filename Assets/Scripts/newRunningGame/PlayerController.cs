@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
             canJump = true;
         }
 
-        if (collision.gameObject.CompareTag("BottomDetector") || collision.gameObject.CompareTag("Obstacle"))
+        if ((collision.gameObject.CompareTag("BottomDetector") || collision.gameObject.CompareTag("Obstacle")) && !isGameOver)
         {
             GameOver();
         }
@@ -102,7 +102,8 @@ public class PlayerController : MonoBehaviour
         speeds = GameObject.Find("ScoreDetector").GetComponent<ScoreSystem>().score;
         //speeds = (int) Mathf.Ceil((increase / 2));
         Debug.Log("speeds score: " + speeds);
-        PlayerPrefs.SetInt("speed", speeds);
+        int newspeed = PlayerPrefs.GetInt("speed") + speeds;
+        PlayerPrefs.SetInt("speed", newspeed);
     }
 
     IEnumerator IncreaseGameSpeed()
