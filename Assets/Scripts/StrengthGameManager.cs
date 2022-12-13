@@ -125,8 +125,14 @@ public class StrengthGameManager : MonoBehaviour
             if(FindObjectsOfType<NoteObject>().Length == 0 && !resultsScreen.activeInHierarchy)
             {
                 //Reaction Test
+                if (!bob.gameObject.activeInHierarchy)
+                {
+                    bob.gameObject.SetActive(true);
+                    deadBob.gameObject.SetActive(false);
+                }
 
-                if(!clockIsTicking && !resultsScreen.activeInHierarchy)
+
+                if (!clockIsTicking && !resultsScreen.activeInHierarchy)
                 {
                     bobAnim.SetBool("rightPressed", false);
                     bobAnim.SetBool("downPressed", false);
@@ -414,39 +420,46 @@ public class StrengthGameManager : MonoBehaviour
         {
             rankVal = "EPICPOG";
             sandbagAnim.SetBool("pogRank", true);
+            strengthIncrease = 13;
         }
         else if(scoreNoteRatio >= 2.2)
         {
             rankVal = "S";
             sandbagAnim.SetBool("greatRank", true);
             explosionSound.Play();
+            strengthIncrease = 11;
         }
         else if(scoreNoteRatio >= 2)
         {
             rankVal = "A";
             sandbagAnim.SetBool("greatRank", true);
             explosionSound.Play();
+            strengthIncrease = 9;
         }
         else if(scoreNoteRatio >= 1.75)
         {
             rankVal = "B";
             sandbagAnim.SetBool("goodRank", true);
+            strengthIncrease = 7;
         }
         else if(scoreNoteRatio >= 1.25)
         {
             rankVal = "C";
             sandbagAnim.SetBool("goodRank", true);
+            strengthIncrease = 5;
         }
         else if(scoreNoteRatio >= 0.6)
         {
             rankVal = "D";
             sandbagAnim.SetBool("badRank", true);
             oofSound.Play();
+            strengthIncrease = 3;
         }
         else
         {
             sandbagAnim.SetBool("badRank", true);
             oofSound.Play();
+            strengthIncrease = 1;
         }
 
         if(theBS.isBrutal)
