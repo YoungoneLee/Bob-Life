@@ -14,6 +14,9 @@ public class BobMainhub : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject boberade;
     public GameObject bob;
+    public AudioSource hubTheme;
+    public AudioSource bobNoise1, bobNoise2, bobNoise3, bobNoise4, gulp;
+    public AudioSource levelStr, levelSpd, levelJmp;
 
     //idle movement script
     Vector3 mousePos;
@@ -24,6 +27,7 @@ public class BobMainhub : MonoBehaviour
     private Rigidbody2D rb;
     private float mapEdge = 7.1f;
     private bool isPaused = false;
+    private float rand;
     Animator anim;
 
     // Start is called before the first frame update
@@ -45,11 +49,20 @@ public class BobMainhub : MonoBehaviour
     void Update()
     {
         if (PlayerPrefs.GetInt("speed") > 30)
+        {
             PlayerPrefs.SetInt("speed", 30);
+            levelSpd.Play();
+        }
         if (PlayerPrefs.GetInt("strength") > 30)
+        {
             PlayerPrefs.SetInt("strength", 30);
+            levelStr.Play();
+        }
         if (PlayerPrefs.GetInt("jump") > 30)
+        {
             PlayerPrefs.SetInt("jump", 30);
+            levelJmp.Play();
+        }
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition += ((Vector2)transform.position - mousePosition).normalized * minDistance;
         float newPosition = Mathf.SmoothDamp(bob.transform.position.x, mousePosition.x, ref currentVelocity.x, smoothTime, maxMoveSpeed);
@@ -83,10 +96,17 @@ public class BobMainhub : MonoBehaviour
                 }
             }
         }
+
+        if (!gulp.isPlaying)
+        {
+            anim.SetBool("Boberade", false);
+            boberade.SetActive(false);
+        }
     }
 
     public void changeSpeed(int increase)
     {
+        levelSpd.Play();
         int speed = PlayerPrefs.GetInt("speed");
         speed += increase;
         spdBar.GetComponent<Slider>().value = speed;
@@ -95,6 +115,7 @@ public class BobMainhub : MonoBehaviour
 
     public void changeStrength(int increase)
     {
+        levelStr.Play();
         int strength = PlayerPrefs.GetInt("strength");
         strength += increase;
         strBar.GetComponent<Slider>().value = strength;
@@ -103,6 +124,7 @@ public class BobMainhub : MonoBehaviour
 
     public void changeJump(int increase)
     {
+        levelJmp.Play();
         int jump = PlayerPrefs.GetInt("jump");
         jump += increase;
         jmpBar.GetComponent<Slider>().value = jump;
@@ -113,13 +135,30 @@ public class BobMainhub : MonoBehaviour
     {
         // Should be some kind of small interaction or sound effect
         Debug.Log("Bob Clicked!");
-        boberade.SetActive(true);
-        if (anim.GetBool("Boberade"))
+
+        rand = UnityEngine.Random.Range(0, 5);
+        if(rand == 0)
         {
-            anim.SetBool("Boberade", false);
-            boberade.SetActive(false);
+            bobNoise1.Play();
         }
-        else anim.SetBool("Boberade", true);
+        else if (rand == 1)
+        {
+            bobNoise2.Play();
+        }
+        else if (rand == 2)
+        {
+            bobNoise3.Play();
+        }
+        else if (rand == 3)
+        {
+            bobNoise4.Play();
+        }
+        else if(rand == 4)
+        {
+            boberade.SetActive(true);
+            anim.SetBool("Boberade", true);
+            gulp.Play();
+        }
     }
 
     public void LoadRunGame()
@@ -147,11 +186,13 @@ public class BobMainhub : MonoBehaviour
         if (isPaused)
         {
             Debug.Log("Resume");
+            hubTheme.UnPause();
             pauseMenu.SetActive(false);
         }
         else
         {
             Debug.Log("Pause");
+            hubTheme.Pause();
             pauseMenu.SetActive(true);
         }
         isPaused = !isPaused;
