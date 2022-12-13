@@ -36,7 +36,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(rb2d.velocity.y < 0)
+
+        if (rb2d.velocity.y < 0)
         {
             anim.SetBool("falling", true);
             anim.SetBool("jumping", false);
@@ -57,6 +58,10 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("running", true);
             rb2d.AddForce(transform.right * speed);
             mashKey = false;
+        }
+        if(isGameOver)
+        {
+            rb2d.velocity = Vector3.zero;
         }
     }
 
