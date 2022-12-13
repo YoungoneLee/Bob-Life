@@ -59,10 +59,6 @@ public class PlayerController : MonoBehaviour
             rb2d.AddForce(transform.right * speed);
             mashKey = false;
         }
-        if(isGameOver)
-        {
-            rb2d.velocity = Vector3.zero;
-        }
     }
 
 
