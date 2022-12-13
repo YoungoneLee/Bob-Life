@@ -80,6 +80,8 @@ public class StrengthGameManager : MonoBehaviour
     public GameObject sandbag, wallHole;
     Animator sandbagAnim;
 
+    public AudioSource grunt1, grunt2, grunt3, deathSound, drinkSound, explosionSound, punchSound, fallSound, oofSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -180,6 +182,11 @@ public class StrengthGameManager : MonoBehaviour
         dumbbell.gameObject.SetActive(false);
         barbell.gameObject.SetActive(false);
         bag.gameObject.SetActive(false);
+        //punchSound.Stop();
+        drinkSound.Stop();
+        grunt1.Stop();
+        grunt2.Stop();
+        grunt3.Stop();
 
         if(!bob.gameObject.activeInHierarchy)
         {
@@ -192,16 +199,38 @@ public class StrengthGameManager : MonoBehaviour
             glove.gameObject.SetActive(true);
             gloveAnim.SetBool("punching", true);
             bag.gameObject.SetActive(true);
+            punchSound.Play();
         }
         if(key == KeyCode.DownArrow) {
             bobAnim.SetBool("downPressed", true);
             boberade.gameObject.SetActive(true);
+            drinkSound.Play();
         }
         if(key == KeyCode.UpArrow) {
             barbell.gameObject.SetActive(true);
+            grunt();
         }
         if(key == KeyCode.LeftArrow) {
             dumbbell.gameObject.SetActive(true);
+            grunt();
+        }
+    }
+
+    public void grunt()
+    {
+        float r = 0;
+        r = Random.Range(1,4);
+        if(r == 1)
+        {
+            grunt1.Play();
+        }
+        else if (r == 2)
+        {
+            grunt2.Play();
+        }
+        else
+        {
+            grunt3.Play();
         }
     }
 
@@ -267,6 +296,7 @@ public class StrengthGameManager : MonoBehaviour
     public void NoteMissed()
     {
         missSound.Play();
+        deathSound.Play();
 
         currentMultiplier = 1;
         multiplierTracker = 0;
@@ -375,6 +405,7 @@ public class StrengthGameManager : MonoBehaviour
         gloveAnim.SetBool("punching", true);
         bobAnim.SetBool("punch", true);
         bobAnim.SetBool("windup", false);
+        punchSound.Play();
 
         StartCoroutine(waiter(.25f));
 
@@ -388,11 +419,13 @@ public class StrengthGameManager : MonoBehaviour
         {
             rankVal = "S";
             sandbagAnim.SetBool("greatRank", true);
+            explosionSound.Play();
         }
         else if(scoreNoteRatio >= 2)
         {
             rankVal = "A";
             sandbagAnim.SetBool("greatRank", true);
+            explosionSound.Play();
         }
         else if(scoreNoteRatio >= 1.75)
         {
@@ -408,10 +441,12 @@ public class StrengthGameManager : MonoBehaviour
         {
             rankVal = "D";
             sandbagAnim.SetBool("badRank", true);
+            oofSound.Play();
         }
         else
         {
             sandbagAnim.SetBool("badRank", true);
+            oofSound.Play();
         }
 
         if(theBS.isBrutal)
@@ -454,6 +489,10 @@ public class StrengthGameManager : MonoBehaviour
         {
             glassSound.Play();
             wallHole.gameObject.SetActive(true);
+        }
+        else if(rank == "C" || rank == "B")
+        {
+            fallSound.Play();
         }
 
         yield return new WaitForSeconds(1f);
