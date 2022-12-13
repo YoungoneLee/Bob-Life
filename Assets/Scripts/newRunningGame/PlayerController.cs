@@ -36,7 +36,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(rb2d.velocity.y < 0)
+
+        if (rb2d.velocity.y < 0)
         {
             anim.SetBool("falling", true);
             anim.SetBool("jumping", false);
