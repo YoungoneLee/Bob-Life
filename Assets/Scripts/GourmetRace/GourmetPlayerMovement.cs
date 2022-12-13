@@ -37,6 +37,7 @@ public class GourmetPlayerMovement : MonoBehaviour
     public Slider bobProgress;
     public TextMeshProUGUI powerUpText;
     public Image powerUpBG;
+    public AudioSource gulp;
 
     private void Awake()
     {
@@ -114,6 +115,7 @@ public class GourmetPlayerMovement : MonoBehaviour
 
     public void drinkBoberade(GameObject boberade)
     {
+        gulp.Play();
         string flavor = boberade.GetComponent<BoberadeScript>().flavor;
         if (flavor == "J")
         {

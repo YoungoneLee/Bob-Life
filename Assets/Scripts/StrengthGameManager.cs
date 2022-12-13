@@ -27,7 +27,7 @@ public class StrengthGameManager : MonoBehaviour
     public int scorePerNote = 100;
     public int scorePerGoodNote = 125;
     public int scorePerPerfectNote = 150;
-    private int strengthIncrease = 0;
+    private float strengthIncrease = 0;
 
     public int currentMultiplier;
     public int multiplierTracker;
@@ -359,7 +359,12 @@ public class StrengthGameManager : MonoBehaviour
             rankVal = "D";
             strengthIncrease = 3;
         }
-        int newStr = PlayerPrefs.GetInt("strength") + strengthIncrease;
+
+        if(theBS.isBrutal)
+        {
+            strengthIncrease = strengthIncrease * 1.5f;
+        }
+        int newStr = PlayerPrefs.GetInt("strength") + (int)strengthIncrease;
         PlayerPrefs.SetInt("strength", newStr);
 
         if(reactionTime == -1f)
