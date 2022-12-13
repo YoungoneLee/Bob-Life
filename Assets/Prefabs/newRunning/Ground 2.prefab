@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2847218538028709075}
-  - component: {fileID: 4282348005133403411}
-  m_Layer: 0
+  - component: {fileID: -1221420140835733980}
+  m_Layer: 6
   m_Name: Ground 2
   m_TagString: ground
   m_Icon: {fileID: 0}
@@ -43,32 +43,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &4282348005133403411
-BoxCollider2D:
+--- !u!65 &-1221420140835733980
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 231618186397238857}
-  m_Enabled: 1
-  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 6.435737, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 13.871474, y: 1}
-  m_EdgeRadius: 0
+  m_Size: {x: 11.88, y: 1, z: 1}
+  m_Center: {x: 6.36, y: 0.02, z: 0}
 --- !u!1 &295671097843236407
 GameObject:
   m_ObjectHideFlags: 0
@@ -79,7 +66,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3110277685978419023}
   - component: {fileID: 5090811673313580763}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground Mid (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +150,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5057822119182422567}
   - component: {fileID: 6997591590654929237}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground Mid (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,7 +234,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3695311241832693858}
   - component: {fileID: 1314029954637836950}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground Mid (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -331,7 +318,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7625322689960122827}
   - component: {fileID: 5550661992128036829}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground Mid (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -415,7 +402,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8317626319377833960}
   - component: {fileID: 2415116457428503526}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -499,7 +486,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7222184200220170043}
   - component: {fileID: 3006069866350865925}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -583,7 +570,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8687059680624783306}
   - component: {fileID: 4863023485433468281}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground Mid (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -667,7 +654,7 @@ GameObject:
   m_Component:
   - component: {fileID: 378019395863806417}
   - component: {fileID: 7484254612087674971}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground Mid (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -751,7 +738,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7054555529872192456}
   - component: {fileID: 3436815456012300266}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground Mid (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -835,7 +822,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7612415559507859945}
   - component: {fileID: 3040087609061557660}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground Mid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -919,7 +906,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1608237583317935568}
   - component: {fileID: 6558581633537913188}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground Mid (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
