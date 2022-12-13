@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     public bool isGameOver = false;
     public GameObject GameOverPanel, scoreText;
     public Text FinalScoreText, HighScoreText;
+    public AudioSource death;
+    public AudioSource boing;
 
     //alt stuff
     bool mashKey = false;
@@ -45,6 +47,7 @@ public class PlayerController : MonoBehaviour
 
         if (spacePressed && !isGameOver)
         {
+            boing.Play();
             anim.SetBool("jumping", true);
             anim.SetBool("grounded", false);
             anim.SetBool("running", false);
@@ -74,6 +77,7 @@ public class PlayerController : MonoBehaviour
 
         if ((collision.gameObject.CompareTag("BottomDetector") || collision.gameObject.CompareTag("Obstacle")) && !isGameOver)
         {
+            death.Play();
             GameOver();
         }
     }
@@ -114,7 +118,7 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(10);
             if(runSpeed < 8)
             {
-                runSpeed += 0.2f;
+                runSpeed += 0.4f;
             }
             if (GameObject.Find("GroundSpawner").GetComponent<ObstacleSpawner>().obstacleSpawnInterval > 1)
             {
