@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class GourmetLoseScript : MonoBehaviour
 {
-    public float score;
+    private float score;
     public Text ScoreTxt;
 
-    private void Awake()
+    private void Start()
     {
         score = PlayerPrefs.GetFloat("bestTime");
         ScoreTxt.text = ("Brutus' Score: " + score.ToString("F") + "s");
