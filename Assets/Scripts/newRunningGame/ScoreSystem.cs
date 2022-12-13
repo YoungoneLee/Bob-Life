@@ -31,7 +31,7 @@ public class ScoreSystem : MonoBehaviour
         if (collision.gameObject.CompareTag("Obstacle"))
         {
             Debug.Log("score" + score);
-            score += 1;
+            score += 2;
             scoreText.text = "Score : " + score;
 
         }
