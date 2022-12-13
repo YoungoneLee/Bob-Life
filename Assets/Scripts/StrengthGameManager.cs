@@ -16,7 +16,7 @@ public class StrengthGameManager : MonoBehaviour
     public StrengthButtons StrengthButton;
     public AudioSource rhythmMusic;
     public AudioSource brutalMusic;
-    public AudioSource missSound, hitSound, perfectSound;
+    public AudioSource missSound, hitSound, perfectSound, glassSound;
     ////////////////////////////////
     // 1. Add music file to scene
     // 2. Turn off play on awake
@@ -75,6 +75,11 @@ public class StrengthGameManager : MonoBehaviour
     public GameObject bag;
     Animator bagAnim;
 
+    public GameObject deadBob;
+
+    public GameObject sandbag, wallHole;
+    Animator sandbagAnim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -94,6 +99,7 @@ public class StrengthGameManager : MonoBehaviour
         boberadeAnim = boberade.GetComponent<Animator>();
         gloveAnim = glove.GetComponent<Animator>();
         bagAnim = bag.GetComponent<Animator>();
+        sandbagAnim = sandbag.GetComponent<Animator>();
 
     }
 
@@ -117,8 +123,29 @@ public class StrengthGameManager : MonoBehaviour
             if(FindObjectsOfType<NoteObject>().Length == 0 && !resultsScreen.activeInHierarchy)
             {
                 //Reaction Test
+
                 if(!clockIsTicking && !resultsScreen.activeInHierarchy)
                 {
+                    bobAnim.SetBool("rightPressed", false);
+                    bobAnim.SetBool("downPressed", false);
+                    gloveAnim.SetBool("punching", false);
+                    glove.gameObject.SetActive(false);
+                    boberade.gameObject.SetActive(false);
+                    dumbbell.gameObject.SetActive(false);
+                    barbell.gameObject.SetActive(false);
+                    bag.gameObject.SetActive(false);
+
+                    if(!bob.gameObject.activeInHierarchy)
+                    {
+                        bob.gameObject.SetActive(true);
+                        deadBob.gameObject.SetActive(false);
+                    }
+
+                    sandbag.gameObject.SetActive(true);
+                    glove.gameObject.SetActive(true);
+                    bobAnim.SetBool("windup", true);
+                    gloveAnim.SetBool("windupPunch", true);
+
                     StartCoroutine(startRandomTimer());
                     clockIsTicking = true;
                     timerCanBeStopped = false;
@@ -153,6 +180,12 @@ public class StrengthGameManager : MonoBehaviour
         dumbbell.gameObject.SetActive(false);
         barbell.gameObject.SetActive(false);
         bag.gameObject.SetActive(false);
+
+        if(!bob.gameObject.activeInHierarchy)
+        {
+            bob.gameObject.SetActive(true);
+            deadBob.gameObject.SetActive(false);
+        }
 
         if(key == KeyCode.RightArrow) {
             bobAnim.SetBool("rightPressed", true);
@@ -241,6 +274,19 @@ public class StrengthGameManager : MonoBehaviour
         multiText.text = "Multiplier: x" + currentMultiplier;
 
         missedHits++;
+
+        //Dead Part
+        bobAnim.SetBool("rightPressed", false);
+        bobAnim.SetBool("downPressed", false);
+        gloveAnim.SetBool("punching", false);
+        glove.gameObject.SetActive(false);
+        boberade.gameObject.SetActive(false);
+        dumbbell.gameObject.SetActive(false);
+        barbell.gameObject.SetActive(false);
+        bag.gameObject.SetActive(false);
+
+        bob.gameObject.SetActive(false);
+        deadBob.gameObject.SetActive(true);
     }
 
     public void showResults()
@@ -248,8 +294,6 @@ public class StrengthGameManager : MonoBehaviour
         readyText.gameObject.SetActive(false);
         pressText.gameObject.SetActive(false);
 
-
-        resultsScreen.SetActive(true);
         normalsText.text = "" + normalHits;
         goodsText.text = goodHits.ToString();
         perfectsText.text = "" + perfectHits;
@@ -328,36 +372,46 @@ public class StrengthGameManager : MonoBehaviour
         }
         */
 
+        gloveAnim.SetBool("punching", true);
+        bobAnim.SetBool("punch", true);
+        bobAnim.SetBool("windup", false);
+
+        StartCoroutine(waiter(.25f));
+
         //RANKINGS UPDATE 2
         if(scoreNoteRatio >= 2.5)
         {
             rankVal = "EPICPOG";
-            strengthIncrease = 8;
+            sandbagAnim.SetBool("pogRank", true);
         }
         else if(scoreNoteRatio >= 2.2)
         {
             rankVal = "S";
-            strengthIncrease = 7;
+            sandbagAnim.SetBool("greatRank", true);
         }
         else if(scoreNoteRatio >= 2)
         {
             rankVal = "A";
-            strengthIncrease = 6;
+            sandbagAnim.SetBool("greatRank", true);
         }
         else if(scoreNoteRatio >= 1.75)
         {
             rankVal = "B";
-            strengthIncrease = 5;
+            sandbagAnim.SetBool("goodRank", true);
         }
         else if(scoreNoteRatio >= 1.25)
         {
             rankVal = "C";
-            strengthIncrease = 4;
+            sandbagAnim.SetBool("goodRank", true);
         }
         else if(scoreNoteRatio >= 0.6)
         {
             rankVal = "D";
-            strengthIncrease = 3;
+            sandbagAnim.SetBool("badRank", true);
+        }
+        else
+        {
+            sandbagAnim.SetBool("badRank", true);
         }
         int newStr = PlayerPrefs.GetInt("strength") + strengthIncrease;
         PlayerPrefs.SetInt("strength", newStr);
@@ -375,6 +429,31 @@ public class StrengthGameManager : MonoBehaviour
 
         finalScoreText.text = "" + currentScore;
 
+        StartCoroutine(resultsWaiter(rankVal));
+    }
+
+    IEnumerator waiter(float time)
+    {
+        yield return new WaitForSeconds(time);
+    }
+
+    IEnumerator resultsWaiter(string rank)
+    {
+        yield return new WaitForSeconds(.75f);
+
+        sandbag.gameObject.SetActive(false);
+        glove.gameObject.SetActive(false);
+        bobAnim.SetBool("punch", false);
+
+        if(rank == "EPICPOG")
+        {
+            glassSound.Play();
+            wallHole.gameObject.SetActive(true);
+        }
+
+        yield return new WaitForSeconds(1f);
+
+        resultsScreen.SetActive(true);
     }
 
     IEnumerator startRandomTimer()
