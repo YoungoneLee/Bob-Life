@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class DoodleBobMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
+    public AudioSource death;
     Animator anime;
     bool grounded;
     bool jumping;
@@ -61,6 +62,8 @@ public class DoodleBobMovement : MonoBehaviour
         }
 
         if (isDead == true) {
+            death.Play();
+            DontDestroyOnLoad(death.transform);
             SceneManager.LoadScene("DoodleEndScene");
             score = PlayerPrefs.GetFloat("score");
             increase = (int) score/500;
