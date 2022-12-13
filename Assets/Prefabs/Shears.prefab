@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 2986409965264609196}
   m_Layer: 0
   m_Name: Shears
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,8 +124,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7711605485039755310}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.32, y: -0.18, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalPosition: {x: 5.2056, y: -0.7708, z: 0}
+  m_LocalScale: {x: 0.42175, y: 0.3061, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3350955659971003327}
@@ -170,8 +170,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 855193423
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f9f67815d9cc6394d9e59cc25ac2e655, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -202,8 +202,8 @@ MonoBehaviour:
   - {fileID: 8893486761765978686}
   - {fileID: 4517341848579724576}
   m_Bounds:
-    m_Center: {x: -0.0038055182, y: 0.1687069, z: 0}
-    m_Extent: {x: 1.458026, y: 3.2161174, z: 0}
+    m_Center: {x: -0.0038046837, y: 0.16870761, z: 0}
+    m_Extent: {x: 1.4580266, y: 3.2161179, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -273,4 +273,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 5
