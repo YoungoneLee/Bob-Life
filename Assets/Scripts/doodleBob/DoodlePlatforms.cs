@@ -26,6 +26,9 @@ public class DoodlePlatforms : MonoBehaviour
                     Score.text = "Score: " + Bob.score.ToString("0");
                     PlayerPrefs.SetFloat("score", Bob.score);
                 }
+                if(Bob.score > 2000) {
+                    Destroy(gameObject);
+                } 
             }
             
         }
