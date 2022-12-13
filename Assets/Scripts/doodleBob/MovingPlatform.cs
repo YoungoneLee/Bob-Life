@@ -51,6 +51,9 @@ public class MovingPlatform : MonoBehaviour
                     Score.text = "Score: " + Bob.score.ToString("0");
                     PlayerPrefs.SetFloat("score", Bob.score);
                 }
+                if (Bob.score > 2500) {
+                    Destroy(transform.parent.gameObject);
+                }
             }
             
         }
