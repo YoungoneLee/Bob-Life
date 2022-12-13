@@ -7,7 +7,7 @@ public class ObstacleSpawner : MonoBehaviour
 
     public GameObject obstacle1, obstacle2, obstacle3;
     [HideInInspector]
-    public float obstacleSpawnInterval = 2.5f;
+    public float obstacleSpawnInterval = 5f;
 
 
     // Start is called before the first frame update
